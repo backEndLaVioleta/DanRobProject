@@ -50,8 +50,7 @@ Collection will include:
           <li>_id: product id that will be the same as product collection. objectId</li>
           <li>name: string</li>
           <li>photo: string</li>
-          ***optional***
-          <li>price: decimal</li>
+          <li>price: decimal ***optional***</li>
         </ul>  
       </li>
       <li>photo: string</li>
@@ -66,7 +65,7 @@ to stock and cost price
 
 #### MENU
 
-*** How many times do we cook grilled onions?. How many cakes we made this week?...*** 
+***How many times do we cook grilled onions?. How many cakes we made this week?...*** 
 
 These questions mean to be answered in the menu collection. Here will show the menu from the restaurant and, at least the first stage of the 
 
