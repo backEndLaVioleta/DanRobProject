@@ -41,7 +41,7 @@ Users won't need to be authenticated, but they'll only be able to read Recipes a
 Collection will include:
 
 <ul>
-  <li>User Info
+  <li>Recipes Info
     <ul>
       <li>_id: objectId</li>
       <li>name: string</li>
@@ -50,7 +50,7 @@ Collection will include:
           <li>_id: product id that will be the same as product collection. objectId</li>
           <li>name: string</li>
           <li>photo: string</li>
-          <li>price: decimal ***optional***</li>
+          <li>price: decimal (optional)</li>
         </ul>  
       </li>
       <li>photo: string</li>
@@ -59,9 +59,11 @@ Collection will include:
   </li>
 </ul> 
 
-In this stage of the DB, we'll just shhow the recipes and preparation to the menu. In thge large run, we'll love to make it linked and related
+In this stage of the DB, we'll just shhow the recipes and preparation to the menu. 
 
-to stock and cost price
+Search engine. ___Need of discussion about the queries. Search for info with [*Algolia*](https://www.algolia.com)___
+
+In thge large run, we'll love to make it linked and related to stock and cost price
 
 #### MENU
 
@@ -70,3 +72,31 @@ to stock and cost price
 These questions mean to be answered in the menu collection. Here will show the menu from the restaurant and, at least the first stage of the 
 
 DB how many times a recipe has been used to do some of the items from the rest menu.
+
+<ul>
+  <li>menu Info
+    <ul>
+      <li>_id: objectId</li>
+      <li>name: string</li>
+      <li>recipes: array[]
+        <ul>
+          <li>_id: product id that will be the same as recipe collection. objectId</li>
+          <li>nameRecipe: string</li>
+        </ul>  
+      </li>
+      <li>photo: string</li>
+    </ul>
+  </li>
+</ul> 
+
+#### GOALS
+
+**First stage:**
+
+> Admins able to do both Recipes and Menus CRUD
+>
+> Users able to read them
+>
+> search engine in recipes and menu
+>
+> When to cook the recipes
