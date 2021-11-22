@@ -1,4 +1,4 @@
-# DanRobProject (BLOSSH)
+# Dan & Rob Project (BLOSSH)
 
 ###### Recipe DDBB
 
@@ -50,7 +50,7 @@ Collection will include:
           <li>_id: product id that will be the same as product collection. objectId</li>
           <li>name: string</li>
           <li>photo: string</li>
-          <li>**optional**</li>
+          **optional**
           <li>price: decimal</li>
         </ul>  
       </li>
