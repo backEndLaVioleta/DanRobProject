@@ -27,6 +27,8 @@ Will have two roles:
       <li>_id: objectId</li>
       <li>firstName: string</li>
       <li>lastName: string</li>
+      <li>email: string</li>
+      <li>password: string</li>
       <li>role: string</li>
     </ul>
   </li>
