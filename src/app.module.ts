@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,7 +13,7 @@ import { join } from 'path';
       type: 'mongodb',
       url: process.env.MONGODB_CONNECTION_STRING,
       database: process.env.MONGODB_DATABASE,
-      entities: [join(__dirname, '/../**/**.entity{.ts,.js}')],
+      entities: [join(__dirname, '/../**/**.entity{.ts}')],
       ssl: true,
       useUnifiedTopology: true,
       useNewUrlParser: true,

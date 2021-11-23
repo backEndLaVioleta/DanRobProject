@@ -1,5 +1,5 @@
 /* eslint-disable  */
-import {Column, Entity, ObjectID, ObjectIdColumn} from 'typeorm';
+import {Column, Entity, ObjectID, ObjectIdColumn} from 'typeorm'
 
 @Entity('user')
  export class User {
@@ -15,3 +15,4 @@ import {Column, Entity, ObjectID, ObjectIdColumn} from 'typeorm';
      Object.assign(this, user)
  }
 }
+ 
