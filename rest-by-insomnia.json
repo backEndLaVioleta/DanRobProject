@@ -1,15 +1,15 @@
 {
     "_type": "export",
     "__export_format": 4,
-    "__export_date": "2021-11-23T17:15:43.931Z",
+    "__export_date": "2021-11-23T21:53:55.181Z",
     "__export_source": "insomnia.desktop.app:v2021.6.0",
     "resources": [
         {
             "_id": "req_2f1998689239460580f14efdeaf3a63f",
             "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
-            "modified": 1637686771949,
+            "modified": 1637704102058,
             "created": 1637683583900,
-            "url": "http://localhost:3000/users",
+            "url": "http://localhost:3000/api/v1/users",
             "name": "/users",
             "description": "",
             "method": "GET",
@@ -40,15 +40,15 @@
         {
             "_id": "req_90cc6fcde5e54a8bb1c185d85ce49da2",
             "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
-            "modified": 1637687692540,
+            "modified": 1637704205774,
             "created": 1637683611605,
-            "url": "http://localhost:3000/users/register",
+            "url": "http://localhost:3000/api/v1/users/register",
             "name": "/users/register",
             "description": "",
             "method": "POST",
             "body": {
                 "mimeType": "application/json",
-                "text": "{\n  \"firstName\": \"donald\",\n  \"lastName\": \"duck\",\n  \"email\": \"ddonald@disney.com\",\n  \"password\": \"daffie\",\n\t\"role\": \"admin\"\n}"
+                "text": "{\n  \"firstName\": \"scooby\",\n  \"lastName\": \"doo\",\n  \"email\": \"sd@snacks.com\",\n  \"password\": \"f0reverHungry\",\n\t\"role\": \"admin\"\n}"
             },
             "parameters": [],
             "headers": [
@@ -72,9 +72,9 @@
         {
             "_id": "req_f37f9019347e4950bbd91d0ce8b55a49",
             "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
-            "modified": 1637686995188,
+            "modified": 1637704216400,
             "created": 1637683847467,
-            "url": "http://localhost:3000/users/619d1ec59c0ad90ca87ae527",
+            "url": "http://localhost:3000/api/v1/users/619d621192073d55f49e629f",
             "name": "/users/{id}",
             "description": "",
             "method": "GET",
@@ -95,9 +95,9 @@
         {
             "_id": "req_d387c81266004bca8c254a6adf85c540",
             "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
-            "modified": 1637687023803,
+            "modified": 1637704244140,
             "created": 1637684824769,
-            "url": "http://localhost:3000/users/619d1ec59c0ad90ca87ae527",
+            "url": "http://localhost:3000/api/v1/users/619d2029cfc6804fac8d45a6",
             "name": "/users/{id}",
             "description": "",
             "method": "PATCH",
@@ -127,9 +127,9 @@
         {
             "_id": "req_8360a91874e94b61b026805f938a9c05",
             "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
-            "modified": 1637687322387,
+            "modified": 1637704251089,
             "created": 1637686094565,
-            "url": "http://localhost:3000/users/619d1fb7b65c20badc7cc172",
+            "url": "http://localhost:3000/api/v1/users/619d2029cfc6804fac8d45a6",
             "name": "/users/{id}",
             "description": "",
             "method": "DELETE",
@@ -170,7 +170,7 @@
             "_type": "cookie_jar"
         },
         {
-            "_id": "spc_2b934d9ce5a046888c829fcfed9cef76",
+            "_id": "spc_2b934d9ce5a046888c829fcfed9cef77",
             "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
             "modified": 1637683553157,
             "created": 1637683553157,
