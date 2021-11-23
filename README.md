@@ -130,3 +130,9 @@ DB how many times a recipe has been used to do some of the items from the rest m
 #### Documentation
 
 Optional fields in TypeScript thanks to [StackOverFlow](https://stackoverflow.com/questions/14142071/typescript-and-field-initializers)
+
+#### packages added 
+
+npm install --save @nestjs/typeorm typeorm @nestjs/config mongodb
+
+

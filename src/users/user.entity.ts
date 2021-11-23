@@ -1,8 +1,8 @@
 /* eslint-disable  */
 import {Column, Entity, ObjectID, ObjectIdColumn} from 'typeorm';
 
-@Entity('users')
-class User {
+@Entity('user')
+ export class User {
  @ObjectIdColumn() id: ObjectID;
  @Column() firstName: string;
  @Column() lastName: string;
@@ -15,5 +15,3 @@ class User {
      Object.assign(this, user)
  }
 }
-
-export default User;
