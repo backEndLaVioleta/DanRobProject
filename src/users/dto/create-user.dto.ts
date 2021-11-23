@@ -8,6 +8,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   readonly lastName: string;
 
+  @IsNotEmpty()
   @IsEmail()
   readonly email: string;
 
