@@ -1,31 +1,43 @@
-/* eslint-disable*/
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { MongoRepository, ObjectID } from 'typeorm';
-import { User } from './user.entity';
+/* eslint-disable */
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-    constructor(
-        @InjectRepository(User)
-        private readonly userRepository: MongoRepository<User>
-    ){}
+  constructor(private readonly usersService: UsersService) {}
 
-    // endPoints
+  @Post('register')
+  async create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
+  }
 
-    @Get()
-    async getAllUsers(): Promise<User[]> {
-        return await this.userRepository.find();
-    }
+  @Get()
+  async findAll() {
+    return this.usersService.findAll();
+  }
 
-    @Get(':id')
-    async getOneUser(@Param('id') id: number): Promise<User>{
-        const user = ObjectID.isValid(id) && await this.userRepository.findOne(id)
-        return user;
-    }
-    
-    @Post()
-    async newUser(@Body() user: Partial<User>): Promise<User>{
-        return await this.userRepository.save(new User(user))
-    }
+  @Get(':id')
+  async findOneById(@Param('id') id: string) {
+    return this.usersService.findOneById(id);
+  }
+
+  @Patch(':id')
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(id, updateUserDto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.usersService.remove(id);
+  }
 }

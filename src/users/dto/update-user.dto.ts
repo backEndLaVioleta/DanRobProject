@@ -1,10 +1,9 @@
-/* eslint-disable */
+/*eslint-disable */
 export class UpdateUserDto {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    role: string;
-    dateCreation?: Date;
-    
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: string;
+  readonly password: string;
+  readonly role: string;
+  readonly creation_date: Date;
 }

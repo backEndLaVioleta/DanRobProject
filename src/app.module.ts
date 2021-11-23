@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { RecipesModule } from './recipes/recipes.module';
 import { MenusModule } from './menus/menus.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -15,13 +16,14 @@ import { MenusModule } from './menus/menus.module';
       type: 'mongodb',
       url: process.env.MONGODB_CONNECTION_STRING,
       database: process.env.MONGODB_DATABASE,
-      entities: [join(__dirname, '/../**/**.entity{.ts}')],
+      entities: ['./**/entities/*.js'],
       ssl: true,
       useUnifiedTopology: true,
       useNewUrlParser: true,
     }),
     RecipesModule,
     MenusModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

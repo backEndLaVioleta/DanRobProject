@@ -1,0 +1,183 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2021-11-23T17:15:43.931Z",
+    "__export_source": "insomnia.desktop.app:v2021.6.0",
+    "resources": [
+        {
+            "_id": "req_2f1998689239460580f14efdeaf3a63f",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637686771949,
+            "created": 1637683583900,
+            "url": "http://localhost:3000/users",
+            "name": "/users",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1637683584054,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "parentId": null,
+            "modified": 1637683571302,
+            "created": 1637683553153,
+            "name": "recetario-blossh",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_90cc6fcde5e54a8bb1c185d85ce49da2",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637687692540,
+            "created": 1637683611605,
+            "url": "http://localhost:3000/users/register",
+            "name": "/users/register",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n  \"firstName\": \"donald\",\n  \"lastName\": \"duck\",\n  \"email\": \"ddonald@disney.com\",\n  \"password\": \"daffie\",\n\t\"role\": \"admin\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_c41694f2eaf5434492b579ae54b8ed32"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1637571248997.5,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_f37f9019347e4950bbd91d0ce8b55a49",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637686995188,
+            "created": 1637683847467,
+            "url": "http://localhost:3000/users/619d1ec59c0ad90ca87ae527",
+            "name": "/users/{id}",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1637515081469.25,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_d387c81266004bca8c254a6adf85c540",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637687023803,
+            "created": 1637684824769,
+            "url": "http://localhost:3000/users/619d1ec59c0ad90ca87ae527",
+            "name": "/users/{id}",
+            "description": "",
+            "method": "PATCH",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n  \"firstName\": \"mickey\",\n  \"lastName\": \"mouse\",\n  \"email\": \"mickey@disney.com\",\n  \"password\": \"minnie\",\n  \"role\": \"admin\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_c763b5d26dd04ad986e8a45c73fdcac8"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1637486997705.125,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_8360a91874e94b61b026805f938a9c05",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637687322387,
+            "created": 1637686094565,
+            "url": "http://localhost:3000/users/619d1fb7b65c20badc7cc172",
+            "name": "/users/{id}",
+            "description": "",
+            "method": "DELETE",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1637472955823.0625,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_6978e903eb21775639daa97409f612b44f9a7273",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637683553168,
+            "created": 1637683553168,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1637683553168,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_6978e903eb21775639daa97409f612b44f9a7273",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637683553171,
+            "created": 1637683553171,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "spc_2b934d9ce5a046888c829fcfed9cef76",
+            "parentId": "wrk_c51f2a08df384b109957e3fd3eb87ea3",
+            "modified": 1637683553157,
+            "created": 1637683553157,
+            "fileName": "recetario-blossch",
+            "contents": "",
+            "contentType": "yaml",
+            "_type": "api_spec"
+        }
+    ]
+}
