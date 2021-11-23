@@ -1,7 +1,7 @@
 {
   "name": "recetario-blossh",
   "version": "0.0.1",
-  "description": "",
+  "description": "In this project we are going to start an APP and DB that will hold the recipes and menu from [BLOSSH](https://www.blossh.com/)",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -67,5 +67,17 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backEndLaVioleta/DanRobProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/backEndLaVioleta/DanRobProject/issues"
+  },
+  "homepage": "https://github.com/backEndLaVioleta/DanRobProject#readme"
 }
