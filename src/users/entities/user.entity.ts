@@ -3,6 +3,8 @@ import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity()
 export class User {
+  // to discuss with Dan
+  // @PrimaryGeneratedColumn() id: number
   @ObjectIdColumn() id: ObjectID;
   @Column() firstName: string;
   @Column() lastName: string;
