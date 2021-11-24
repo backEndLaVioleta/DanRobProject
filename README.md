@@ -105,7 +105,7 @@ DB how many times a recipe has been used to do some of the items from the rest m
 
 #### presentation 24/12/21
 
- * [Diapos](https://slides.com/d/rlm8G5c/live#/recetario-blossh) 
+ * [Diapos](https://slides.com/d/rlm8G5c/live) 
 
  * Explanation project
 
