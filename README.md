@@ -105,13 +105,13 @@ DB how many times a recipe has been used to do some of the items from the rest m
 
 #### presentation 24/12/21
 
- * Diapos
+ * [Diapos](https://github.com/backEndLaVioleta/DanRobProject/issues/1) 
 
  * Explanation project
 
  * Objectives
 
- * End Points (___or at least the main ones___)
+ * End [Points](https://documenter.getpostman.com/view/9175109/UVJYLzEw) (___or at least the main ones___)
 
 #### Presentation 26/12/21
 
