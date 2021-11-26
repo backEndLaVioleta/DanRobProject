@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   Controller,
   Get,
@@ -29,6 +28,11 @@ export class UsersController {
   @Get(':id')
   async findOneById(@Param('id') id: string) {
     return this.usersService.findOneById(id);
+  }
+
+  @Get(':email')
+  async findOneByEmail(@Param('email') email: string) {
+    return this.usersService.findOneByEmail(email);
   }
 
   @Patch(':id')
