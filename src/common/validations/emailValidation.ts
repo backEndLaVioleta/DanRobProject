@@ -29,7 +29,7 @@ export class UserAlreadyExistConstraint
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   defaultMessage(_args: ValidationArguments) {
-    return 'User already exist';
+    return 'User already exists';
   }
 }
 
