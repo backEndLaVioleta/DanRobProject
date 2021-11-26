@@ -20,7 +20,7 @@ export class UserAlreadyExistConstraint
       // let myBoolean = false;
       console.log(user);
       console.log('You are passing though the decorator');
-      if (user) return false;
+      if (user.length) return false;
       return true;
     } catch (error) {
       throw new Error(`${error.message}`);

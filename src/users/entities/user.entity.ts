@@ -12,9 +12,7 @@ export class User {
   @Column() lastName: string;
   @Column({ unique: true })
   @IsEmail()
-  @UserAlreadyExist({
-    message: 'User $value already exist. Choose another email',
-  })
+  @UserAlreadyExist()
   email: string;
   @Column() password: string;
   @Column() role: string;
