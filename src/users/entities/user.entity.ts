@@ -10,7 +10,7 @@ export class User {
   @ObjectIdColumn() id: ObjectID;
   @Column() firstName: string;
   @Column() lastName: string;
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   @UserAlreadyExist({
     message: 'User $value already exist. Choose another email',

@@ -18,6 +18,8 @@ export class UserAlreadyExistConstraint
     try {
       const user = await this.userService.findOneByEmail(email);
       // let myBoolean = false;
+      console.log(user);
+      console.log('You are passing though the decorator');
       if (user) return false;
       return true;
     } catch (error) {

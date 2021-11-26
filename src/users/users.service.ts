@@ -13,13 +13,18 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   async create(createUserDto: CreateUserDto) {
     const user = new User();
     Object.assign(user, createUserDto);
 
-    return await this.userRepository.save(user);
+    const repeatedUser = await this.findOneByEmail(user.email);
+    if (repeatedUser.length) {
+      return ('User already Exists')
+    } else {
+      return await this.userRepository.save(user);
+    }
   }
 
   async findAll() {
@@ -34,11 +39,11 @@ export class UsersService {
     } else throw new BadRequestException('User does not exist.');
   }
 
-  async findOneByEmail(mail: any) {
-    if(isEmail(mail)){
-      return await this.userRepository.find({email: mail});
+  async findOneByEmail(mail: string) {
+    if (isEmail(mail)) {
+      return await this.userRepository.find({ email: mail });
     } else throw new BadRequestException('Not proper email format');
-    
+
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
