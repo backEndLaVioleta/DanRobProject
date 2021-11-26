@@ -19,11 +19,9 @@ export class UsersService {
     Object.assign(user, createUserDto);
 
     const repeatedUser = await this.findOneByEmail(user.email);
-    if (repeatedUser.length) {
-      return 'User already Exists';
-    } else {
+    if (!repeatedUser.length) {
       return await this.userRepository.save(user);
-    }
+    } else throw new BadRequestException('User already exist.');
   }
 
   async findAll() {
