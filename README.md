@@ -116,7 +116,7 @@ DB how many times a recipe has been used to do some of the items from the rest m
 #### Presentation 26/12/21
 
  * Planning 🚴‍♂️
-  - Trello
+  - [Trello](https://trello.com/b/hgAzmca5/proyecto-m4-dan-y-roberto-recetario-blossh)
 
  * Work Done 🎟️
   - What has been done?
