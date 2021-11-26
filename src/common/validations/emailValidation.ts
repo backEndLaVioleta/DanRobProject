@@ -14,16 +14,20 @@ export class UserAlreadyExistConstraint
 {
   constructor(private userService: UsersService) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async validate(email: any, _args: ValidationArguments) {
+  async validate(email: string | any) {
     try {
       const user = await this.userService.findOneByEmail(email);
-      let myBoolean = false;
-      user ? myBoolean : (myBoolean = true);
-      return myBoolean;
+      // let myBoolean = false;
+      if (user) return false;
+      return true;
     } catch (error) {
       throw new Error(`${error.message}`);
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  defaultMessage(_args: ValidationArguments) {
+    return 'User already exist';
   }
 }
 

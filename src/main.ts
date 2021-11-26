@@ -9,6 +9,7 @@ async function bootstrap() {
 
   const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix);
+
   // config swagger
   const configSwagger = new DocumentBuilder()
     .setTitle('Blossh Recipes')
@@ -19,11 +20,14 @@ async function bootstrap() {
 
   const docSwagger = SwaggerModule.createDocument(app, configSwagger);
   SwaggerModule.setup('test', app, docSwagger);
-
-  const port = process.env.PORT || 3000;
-  await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
-  });
+  try {
+    const port = process.env.PORT || 3000;
+    await app.listen(port, () => {
+      Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+    });
+  } catch (error) {
+    throw new Error(`${error.message}`);
+  }
 }
 
 bootstrap();
