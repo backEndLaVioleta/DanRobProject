@@ -9,7 +9,7 @@ import { UsersService } from 'src/users/users.service';
 
 // first try
 @ValidatorConstraint({ async: true })
-export class UserAlreadyExistConstraint
+export default class UserAlreadyExistConstraint
   implements ValidatorConstraintInterface
 {
   constructor(private userService: UsersService) {}

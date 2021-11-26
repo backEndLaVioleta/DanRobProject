@@ -135,4 +135,83 @@ Optional fields in TypeScript thanks to [StackOverFlow](https://stackoverflow.co
 
 npm install --save @nestjs/typeorm typeorm @nestjs/config mongodb
 
+#### GIT and GITHUB
+
+Dan and I are working together in this project. Git commands that we highly recommend to work in a team
+
+	* ___One repository___
+	
+	Pick Up one of the profiles and open just one repository. 
+	
+	*___One main | master___
+	
+	One main or master branch. Is the anchor of the project. Once the repository is created, clone it into your computer
+	
+	> git clone htttps://github/<name Of Organization>/<name of the repository>.git
+	
+	*__As MANY branches requiered___
+	
+	Now you can check how everything is doing into your computer
+	
+	> git status
+	
+	- To see local branches
+	
+	> git branch 
+	
+	- To see remote branches
+	
+	> git branch -r
+	
+	* __Create new Branch___
+	
+	> git checkout -b my_new_branch_name
+	
+	- To work with your new branch
+	
+	> git checkout my_new_branch_name
+	
+	**Important**
+	
+	Your new branch **is not yet** working in remote
+	
+	- To push your my_new_branch_name to the remote repository
+	
+	> git push -u origin my_new_branch_name
+	
+	or
+	
+	> git push -u origin HEAD
+	
+	*___Get and work with remote branches___
+	
+	- Get all branches from remote
+	
+	> git fetch origin
+	
+	- check if you have the branches from remote
+	
+	> git branch -v -a
+	
+	```
+	main                    5ac0dbc Update README.md
+    remotes/origin/HEAD     -> origin/main
+    remotes/origin/dev-dan  cbb15fe :art: Working version
+    remotes/origin/dev-rob  cf50e24 dev-rob
+    remotes/origin/homeWork d23d7a2 check mail work in userService
+    remotes/origin/main     5ac0dbc Update README.md
+
+	```
+	- to work in local with the remote branch
+	
+	> git checkout -b name_branch_ you_want origin/name_branch_you_want
+	
+	```
+	git checkout -b dev-rob origin/dev-rob
+	Switched to a new branch 'dev-rob'
+	Branch 'dev-rob' set up to track remote branch 'dev-rob' from 'origin'
+	```
+	ready to work with the desired branch
+	
+
 
