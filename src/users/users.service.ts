@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,7 +12,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) { }
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const user = new User();
@@ -21,7 +20,7 @@ export class UsersService {
 
     const repeatedUser = await this.findOneByEmail(user.email);
     if (repeatedUser.length) {
-      return ('User already Exists')
+      return 'User already Exists';
     } else {
       return await this.userRepository.save(user);
     }
@@ -43,7 +42,6 @@ export class UsersService {
     if (isEmail(mail)) {
       return await this.userRepository.find({ email: mail });
     } else throw new BadRequestException('Not proper email format');
-
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
