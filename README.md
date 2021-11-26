@@ -213,5 +213,5 @@ to work in local with the remote branch
 	```
 ready to work with the desired branch
 	
-
+[Link](https://www.nobledesktop.com/learn/git/git-branches) to resource
 
