@@ -143,13 +143,13 @@ Dan and I are working together in this project. Git commands that we highly reco
 	
 	Pick Up one of the profiles and open just one repository. 
 	
-*___One main | master___
+* ___One main | master___
 	
 One main or master branch. Is the anchor of the project. Once the repository is created, clone it into your computer
 	
 	> git clone htttps://github/<name Of Organization>/<name of the repository>.git
 	
-*___As MANY branches requiered___
+* ___As MANY branches requiered___
 	
 Now you can check how everything is doing into your computer
 	
@@ -163,7 +163,7 @@ To see remote branches
 	
 	> git branch -r
 	
-*___Create new Branch___
+* ___Create new Branch___
 	
 	> git checkout -b my_new_branch_name
 	
@@ -213,5 +213,5 @@ to work in local with the remote branch
 	```
 ready to work with the desired branch
 	
-[Link](https://www.nobledesktop.com/learn/git/git-branches) to resource
+[Link](https://www.nobledesktop.com/learn/git/git-branches) to resources Git
 
