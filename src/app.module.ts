@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RecipesModule } from './recipes/recipes.module';
-import { MenusModule } from './menus/menus.module';
 import { UsersModule } from './users/users.module';
+import { MenuModule } from './menu/menu.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -21,8 +22,9 @@ import { UsersModule } from './users/users.module';
       useNewUrlParser: true,
     }),
     RecipesModule,
-    MenusModule,
     UsersModule,
+    MenuModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
