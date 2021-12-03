@@ -5,7 +5,7 @@ import { ObjectID } from 'mongodb';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import isEmail from 'validator/lib/isEmail';
+import { isEmail } from 'class-validator';
 
 @Injectable()
 export class UsersService {
@@ -22,6 +22,7 @@ export class UsersService {
     if (!repeatedUser.length) {
       return await this.userRepository.save(user);
     } else throw new BadRequestException('User already exist.');
+    // return await this.userRepository.save(user);
   }
 
   async findAll() {

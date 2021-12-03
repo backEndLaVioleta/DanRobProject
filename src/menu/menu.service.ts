@@ -3,13 +3,13 @@ import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 
 @Injectable()
-export class MenusService {
+export class MenuService {
   create(createMenuDto: CreateMenuDto) {
     return 'This action adds a new menu';
   }
 
   findAll() {
-    return `This action returns all menus`;
+    return `This action returns all menu`;
   }
 
   findOne(id: number) {
