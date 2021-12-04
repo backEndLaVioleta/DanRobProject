@@ -1,6 +1,6 @@
 use('Blossh');
 
-/* db.createCollection('users', {
+db.createCollection('users', {
 
   validator: {
     $jsonSchema: {
@@ -41,12 +41,74 @@ use('Blossh');
       }
     }
   }
-}); */
-/* db.users.insertOne({
+});
+db.users.insertOne({
      firstName : "John",
     lastName : "Wick",
     email: "hello@hello.com",
     password: "johnWick1234",
     role: "user",
     arrayOrder: []
-}); */
+});
+
+db.createCollection('recipes', {
+
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["name", "ingredients", "type", "allergens"],
+            additionalProperties: true,
+            properties: {
+                _id: {
+                    bsonType: "objectId",
+                    description: "Mongodb hex system of id"
+                },
+                recipe_name: {
+                    bsonType: "string",
+                    description: "must be a string. Required"
+                },
+                description: {
+                    bsonType: "string",
+                    description: "must be a description of the recipe"
+                },
+                photo: {
+                    bsonType: "string",
+                    description: "an uri or url for the recipe image"
+                },
+                ingredients: {
+                    bsonType: "array"
+                    description: "list of ingredients"
+                },
+                type: {
+                    enum: ["starter", "salad", "main", "dessert"],
+                    description: "must be one of the types described above"
+                },
+                allergens: {
+                    bsonType: "array",
+                    description: "must be an array with all the possible allergens in the recipe. Required"
+                },
+                extras_available: {
+                    bsonType: "array",
+                    description: " an array of the given extras for every recipe."
+                },
+                times_made: {
+                    bsonType: "int",
+                    description: "ask Dan"
+                },
+                instructions: {
+                    bsonType: "string",
+                    description: "an explanation of how to make the recipe || dish"
+                },
+                cooking_time_minutes: {
+                    bsonType: "int",
+                    description: "must be a number. Indicates how many minutes the recipe needs to be cooked | ready"
+                },
+                on_menu: {
+                    bsonType: "boolean",
+                    description: "a boolean that indicates if the recipe is available for clients | users to picjup for their orders."
+                }
+            }
+
+        }
+    }
+})
