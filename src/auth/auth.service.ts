@@ -1,23 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import Encryptation from 'src/common/encrytation.helper';
 import { UsersService } from 'src/users/users.service';
 import LoginUserDto from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UsersService,
     private jwtService: JwtService,
+    @Inject(forwardRef(() => UsersService))
+    private userService: UsersService,
   ) {}
 
   async validateUser(email: string, pass: string): Promise<string | any> {
     console.log(email, pass);
     const user = await this.userService.findOneByEmail(email);
     console.log(user);
-    let myResponse: any;
-    user ? (myResponse = user) : (myResponse = null);
-    console.log(myResponse);
-    return myResponse;
+    if (!user) return null;
+    const isValidPassword = await Encryptation.comparePassword(
+      pass,
+      user.password,
+    );
+
+    if (isValidPassword) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, email, ...result } = user;
+      return result;
+    }
+    return null;
   }
 
   async login(user: LoginUserDto) {
