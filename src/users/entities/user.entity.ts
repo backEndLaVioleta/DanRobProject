@@ -1,4 +1,4 @@
-import Encryptation from 'src/common/encrytation.helper';
+import Encryptation from 'src/common/utilities/encrytation.helper';
 import {
   BeforeInsert,
   Column,

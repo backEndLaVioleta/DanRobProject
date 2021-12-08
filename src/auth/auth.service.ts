@@ -1,6 +1,6 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import Encryptation from 'src/common/encrytation.helper';
+import Encryptation from 'src/common/utilities/encrytation.helper';
 import { UsersService } from 'src/users/users.service';
 import LoginUserDto from './dto/login.dto';
 
