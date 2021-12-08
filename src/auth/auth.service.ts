@@ -7,9 +7,9 @@ import LoginUserDto from './dto/login.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService: JwtService,
     @Inject(forwardRef(() => UsersService))
     private userService: UsersService,
+    private jwtService: JwtService,
   ) {}
 
   async validateUser(email: string, pass: string): Promise<string | any> {

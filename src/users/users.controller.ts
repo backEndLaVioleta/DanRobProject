@@ -10,23 +10,21 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthService } from 'src/auth/auth.service';
-import LoginUserDto from 'src/auth/dto/login.dto';
+//import { AuthService } from 'src/auth/auth.service';
+//import LoginUserDto from 'src/auth/dto/login.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly authService: AuthService) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('register')
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
-  @Post('login')
-  async login(@Body() loginUserDto: LoginUserDto) {
-    return this.authService.login(loginUserDto);
-  }
+  //@Post('login')
+  //async login(@Body() loginUserDto: LoginUserDto) {
+  //  return this.authService.login(loginUserDto);
+  //}
 
   @Get()
   async findAll() {

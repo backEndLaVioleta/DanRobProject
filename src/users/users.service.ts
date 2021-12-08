@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  forwardRef,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
@@ -11,16 +6,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { isEmail } from 'class-validator';
-import { AuthService } from 'src/auth/auth.service';
-import LoginUserDto from 'src/auth/dto/login.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    @Inject(forwardRef(() => AuthService))
-    private authService: AuthService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -32,9 +23,6 @@ export class UsersService {
       return await this.userRepository.save(user);
     } else throw new BadRequestException('User already exist.');
     // return await this.userRepository.save(user);
-  }
-  async login(loginUserDto: LoginUserDto) {
-    return await this.authService.login(loginUserDto);
   }
   async findAll() {
     return await this.userRepository.find();
