@@ -1,4 +1,6 @@
 import {
+  AfterInsert,
+  AfterUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -18,4 +20,14 @@ export class User {
   @Column({ default: false }) isAdmin: boolean;
   @CreateDateColumn() createdDate: Date;
   @UpdateDateColumn() updatedDate: Date;
+
+  @AfterInsert()
+  logInsert() {
+    console.log('Inserted User with id', this.id);
+  }
+
+  @AfterUpdate()
+  logUpdate() {
+    console.log('Updated User with id', this.id);
+  }
 }
