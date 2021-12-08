@@ -11,6 +11,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
   async validate(email: string, password: string): Promise<any> {
     const user = await this.authServive.validateUser(email, password);
+    console.log(user);
     if (!user) throw new Error('User not in the db');
 
     return user;

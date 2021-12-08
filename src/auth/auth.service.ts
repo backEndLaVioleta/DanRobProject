@@ -17,14 +17,16 @@ export class AuthService {
     const user = await this.userService.findOneByEmail(email);
     console.log(user);
     if (!user) return null;
+    console.log(`${pass} must be equal as ${user.password}`);
     const isValidPassword = await Encryptation.comparePassword(
       pass,
       user.password,
     );
-
+    console.log(isValidPassword);
     if (isValidPassword) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, email, ...result } = user;
+      console.log(result);
       return result;
     }
     return null;
