@@ -1,7 +1,13 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ObjectID,
+  ObjectIdColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
-
 export class User {
   @ObjectIdColumn() id: ObjectID;
   @Column() firstName: string;
@@ -9,9 +15,7 @@ export class User {
   @Column() email: string;
   @Column() password: string;
   @Column() role: string;
-  @Column() creation_date?: Date;
-
-  constructor(user?: Partial<User>) {
-    Object.assign(this, user);
-  }
+  @Column({ default: false }) isAdmin: boolean;
+  @CreateDateColumn() createdDate: Date;
+  @UpdateDateColumn() updatedDate: Date;
 }
