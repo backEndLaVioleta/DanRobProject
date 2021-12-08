@@ -46,7 +46,7 @@ use('Blossh');
     role: "user"
 }); */
 
-db.createCollection('recipes', {
+/*db.createCollection('recipes', {
 
     validator: {
         $jsonSchema: {
@@ -140,8 +140,8 @@ db.createCollection('recipes', {
 
         }
     }
-});
- db.recipes.insertOne({
+});*/
+ /*db.recipes.insertOne({
     recipe_name: "baby spinach salad",
     ingredients: [
         {
@@ -211,7 +211,7 @@ db.createCollection('recipes', {
     extras_available: ["sliced parmesan chez", "granted parmesan chez", "pear", "radish", "honey mustard sauce", "fried onions", "radish", "cranberries", "bacon"],
     times_made: 10,
     on_menu: true
-});  
+});*/  
  //db.getCollection('users').find({})
  //db.getCollection('recipes').find({})
  //db.recipes.drop();
