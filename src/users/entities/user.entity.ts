@@ -16,8 +16,11 @@ export class User {
   @Column() lastName: string;
   @Column() email: string;
   @Column() password: string;
-  @Column() role: string;
   @Column({ default: false }) isAdmin: boolean;
+
+  // TODO: possibly allow various types of users
+  // @Column({ default: 'user' }) role: string;
+
   @CreateDateColumn() createdDate: Date;
   @UpdateDateColumn() updatedDate: Date;
 

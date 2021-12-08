@@ -1,11 +1,9 @@
 /* eslint-disable */
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsString } from 'class-validator';
 
 export class CreateUserDto {
-  @IsNotEmpty()
   readonly firstName: string;
 
-  @IsNotEmpty()
   readonly lastName: string;
 
   @IsNotEmpty()
@@ -13,10 +11,6 @@ export class CreateUserDto {
   readonly email: string;
 
   @IsNotEmpty()
+  @IsString()
   readonly password: string;
-
-  @IsNotEmpty()
-  readonly role: string;
-
-  readonly creation_date: Date;
 }
