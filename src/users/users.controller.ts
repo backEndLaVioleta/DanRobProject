@@ -10,7 +10,6 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { FindAllUsersDto } from './dto/find-users.dto';
 import { User } from './entities/user.entity';
 //import { AuthService } from 'src/auth/auth.service';
 //import LoginUserDto from 'src/auth/dto/login.dto';
@@ -24,7 +23,7 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Get()
+  @Get('all')
   async findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
