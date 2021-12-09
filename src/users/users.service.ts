@@ -19,7 +19,7 @@ export class UsersService {
   ) {}
 
   async create(body: CreateUserDto) {
-    const users = await this.findOneByEmail(body.email);
+    const users = await this.findRegisterEmail(body.email);
     if (users) {
       throw new BadRequestException('Email already in use');
     }
@@ -64,7 +64,15 @@ export class UsersService {
       return user;
     } else throw new BadRequestException('Not proper email format');
   }
-
+  async findRegisterEmail(email: string) {
+    if (isEmail(email)) {
+      const user = await this.userRepository.findOne({ email });
+      if (user) {
+        throw new NotFoundException('User already in database');
+      }
+      return user;
+    } else throw new BadRequestException('Not proper email format');
+  }
   async update(id: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ userId: id });
     if (!user) {
