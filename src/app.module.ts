@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,6 +7,7 @@ import { RecipesModule } from './recipes/recipes.module';
 import { UsersModule } from './users/users.module';
 import { MenuModule } from './menu/menu.module';
 import { OrdersModule } from './orders/orders.module';
+import { AuthModule } from './auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
 
 @Module({
@@ -26,6 +26,7 @@ import { APP_PIPE } from '@nestjs/core';
     UsersModule,
     MenuModule,
     OrdersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

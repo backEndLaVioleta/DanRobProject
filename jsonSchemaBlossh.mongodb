@@ -1,6 +1,6 @@
 use('Blossh');
 
-db.createCollection('users', {
+/* db.createCollection('users', {
 
   validator: {
     $jsonSchema: {
@@ -23,40 +23,35 @@ db.createCollection('users', {
         },
         email: {
           bsonType : "string",
-          pattern : "@mongodb\.com$",
+          pattern : "[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+",
           description: "must be a string and match the regular expression pattern. Required"
         }, 
         password: {
-            bsonType: "string"
+            bsonType: "string",
             description: "It would be hashed when user creation. Required"
-        }
+        },
         role: {
           enum: ["admin", "user"],
           description: " There are only two options and is required to eine our user's rights"
-        },
-        arrayOrder: {
-            bsonType: "array",
-            description: "To be added to user clients if discussed with Dan goes ok"
         }
       }
     }
   }
-});
-db.users.insertOne({
+});*/
+/* db.users.insertOne({
      firstName : "John",
     lastName : "Wick",
     email: "hello@hello.com",
     password: "johnWick1234",
-    role: "user",
-    arrayOrder: []
-});
+    role: "user"
+}); */
 
-db.createCollection('recipes', {
+/*db.createCollection('recipes', {
 
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["name", "ingredients", "type", "allergens"],
+            required: ["recipe_name", "ingredients", "dish_type"],
             additionalProperties: true,
             properties: {
                 _id: {
@@ -67,48 +62,157 @@ db.createCollection('recipes', {
                     bsonType: "string",
                     description: "must be a string. Required"
                 },
-                description: {
+                ingredients: {
+                    bsonType: "array",
+                    minItems: 1,
+                    items: {
+                        bsonType: "object",
+                        required: ["ingredient", "servings", "quantity","measure" , "allergens"],
+                        additionalProperties: true,
+                        description: "'ingredients' cannot have all these fields empty ",
+                        properties: {
+                            ingredient: {
+                                bsonType: "string",
+                                description: "name of the ingredient in the recipe. Must be a string. Required"
+                            },
+                            servings: {
+                                bsonType: ["int", "double"],
+                                description: "For how many people or portions are all the ingredients units thought for. Required"
+                            },
+                            quantity: {
+                                bsonType: ["int", "double", "decimal"],
+                                description: "'quantity' goes alongside with measure. Required"
+                            },
+                            measure: {
+                                enum: ["tsp", "Tbsp", "cup", "ounce", "pound", "USgl", "each", "g", "kg", "cl", "l", "piece", "slice"],
+                                description: "Given enum to pick up one. Goes alongside quantity. Required"
+                            },
+                            ingredients: {
+                                bsonType: "array",
+                                items: {
+                                    bsonType: "string",
+                                    description: "array to place the possible ingredients",
+                                }
+                            },
+                            allergens: {
+                                bsonType: "array",
+                                items: {
+                                    bsonType: "string",
+                                    description: "array to place the possible allegerns in the ingredients. If none, 'none' must be writen. Required",
+                                }
+                            }
+                        }
+                    }
+                },
+                recipe_description: {
                     bsonType: "string",
                     description: "must be a description of the recipe"
-                },
-                photo: {
-                    bsonType: "string",
-                    description: "an uri or url for the recipe image"
-                },
-                ingredients: {
-                    bsonType: "array"
-                    description: "list of ingredients"
-                },
-                type: {
-                    enum: ["starter", "salad", "main", "dessert"],
-                    description: "must be one of the types described above"
-                },
-                allergens: {
-                    bsonType: "array",
-                    description: "must be an array with all the possible allergens in the recipe. Required"
-                },
-                extras_available: {
-                    bsonType: "array",
-                    description: " an array of the given extras for every recipe."
-                },
-                times_made: {
-                    bsonType: "int",
-                    description: "ask Dan"
                 },
                 instructions: {
                     bsonType: "string",
                     description: "an explanation of how to make the recipe || dish"
                 },
                 cooking_time_minutes: {
-                    bsonType: "int",
+                    bsonType: ["int", "double", "decimal"],
                     description: "must be a number. Indicates how many minutes the recipe needs to be cooked | ready"
                 },
+                photo: {
+                    bsonType: "string",
+                    description: "an uri or url for the recipe image"
+                },
+                dish_type: {
+                    enum: ["starter", "salad", "main", "dessert"],
+                    description: "must be one of the types described above. Required"
+                },
+                extras_available: {
+                    bsonType: "array",
+                    description: "an array of the given extras for every recipe."
+                },
+                times_made: {
+                    bsonType: ["int", "double", "decimal"],
+                    description: "ask Dan"
+                },
                 on_menu: {
-                    bsonType: "boolean",
+                    type: "boolean",
                     description: "a boolean that indicates if the recipe is available for clients | users to picjup for their orders."
                 }
             }
 
         }
     }
-})
+});*/
+ /*db.recipes.insertOne({
+    recipe_name: "baby spinach salad",
+    ingredients: [
+        {
+        ingredient: "baby spinach leaves",
+        servings: 1,
+        quantity: 2,
+        measure: "cup",
+        allergens: ["none"]
+        },
+        {
+        ingredient: "pear",
+        servings: 1,
+        quantity: 0.5,
+        measure: "piece",
+        allergens: ["none"]
+        },
+        {
+        ingredient: "pear",
+        servings: 1,
+        quantity: 3,
+        measure: "slice",
+        allergens: ["none"]
+        },
+        {
+        ingredient: "slided parmigiano-reggiano cheese",
+        servings: 1,
+        quantity: 10,
+        measure: "g",
+        allergens: ["milk"]
+        },
+        {
+        ingredient: "honey mustard sauce",
+        servings: 1,
+        quantity: 7,
+        measure: "cl",
+        ingredients: ["mayonnaise", "honey", "dijon mustard", "yellow mustard", " apple cidder vinegar", "garlic powder", "paprika", "salt", "freshly craked pepper"],
+        allergens: ["egg", "seeds", "mustard", "traces of nuts"]
+        },
+        {
+        ingredient: "guacamole",
+        servings: 1,
+        quantity: 1,
+        measure: "Tbsp",
+        ingredients: ["avocado", "lemon juice", "red onions", "salt", "corianter"],
+        allergens: ["none"]
+        },
+        {
+        ingredient: "radish",
+        servings: 1,
+        quantity: 3,
+        measure: "slice",
+        allergens: ["none"]
+        },
+        {
+        ingredient: "fried onion",
+        servings: 1,
+        quantity: 1,
+        measure: "Tbsp",
+        allergens: ["none"]
+        }
+    ],
+    description: "a fresh, light, balanced salad",
+    instructions: "add the two cups of spinachs ina a bol. Chopped the pear's half piece into cubes. Add them to the bowl among the honesy mustard sauce and the parmeggiano chez. Mixed gently. Take an empty dish and place in the middle the guacamole's scoop. Add the content of the bol. On top of the salad add the fried onion, the slices of pear and radish and a last touch of sliced parmeggiano chez ",
+    cooking_time_minutes: 8,
+    photo: "image/png",
+    dish_type: "salad",
+    extras_available: ["sliced parmesan chez", "granted parmesan chez", "pear", "radish", "honey mustard sauce", "fried onions", "radish", "cranberries", "bacon"],
+    times_made: 10,
+    on_menu: true
+});*/  
+ //db.getCollection('users').find({})
+ //db.getCollection('recipes').find({})
+ //db.recipes.drop();
+ 
