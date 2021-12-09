@@ -19,14 +19,15 @@ export class UsersService {
   ) {}
 
   async create(body: CreateUserDto) {
-    const users = await this.findOneByEmail(body.email);
-    if (users) {
+    const users = await this.userRepository.find({ email: body.email });
+    if (users.length > 0) {
       throw new BadRequestException('Email already in use');
     }
     const user = this.userRepository.create(body);
 
     return await this.userRepository.save(user);
   }
+
   async findAll() {
     try {
       return await this.userRepository.find();
