@@ -1,8 +1,9 @@
 import { Expose } from 'class-transformer';
+import { ObjectID } from 'typeorm';
 
 export class UserDto {
   @Expose()
-  id: number;
+  userId: ObjectID;
 
   @Expose()
   firstName: string;
@@ -21,4 +22,7 @@ export class UserDto {
 
   @Expose()
   isAdmin: boolean;
+
+  @Expose()
+  access_token: string;
 }
