@@ -28,6 +28,14 @@ export class UsersController {
   async findAll() {
     return this.usersService.findAll();
   }
+  /* @Get()
+  async findAll(@Body() findAllUsersDto: FindAllUsersDto) {
+    console.log(findAllUsersDto.order, findAllUsersDto.limit);
+    return this.usersService.findAll(
+      findAllUsersDto.order,
+      findAllUsersDto.limit,
+    );
+  } */
 
   @Get('/:id')
   async findOneById(@Param('id') id: string) {

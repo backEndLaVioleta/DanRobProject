@@ -10,6 +10,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { isEmail } from 'class-validator';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 
 @Injectable()
 export class UsersService {
@@ -25,12 +26,27 @@ export class UsersService {
     }
     const user = this.userRepository.create(body);
 
-    return this.userRepository.save(user);
+    return await this.userRepository.save(user);
   }
-
   async findAll() {
-    return await this.userRepository.find();
+    try {
+      return await this.userRepository.find();
+    } catch (error) {
+      throw new HttpExceptionFilter();
+    }
   }
+  /* async findAll(order: number, limit: number) {
+    console.log(`my oder: ${order}, my limit: ${limit}`);
+    try {
+      const sort = order ? 'ASC' : 'DESC';
+      return await this.userRepository.find({
+        order: { firstName: sort },
+        take: limit,
+      });
+    } catch (error) {
+      throw new HttpExceptionFilter();
+    }
+  } */
 
   async findOneById(id: string) {
     if (ObjectID.isValid(id)) {

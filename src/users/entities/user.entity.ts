@@ -1,6 +1,8 @@
+import Encryptation from 'src/common/utilities/encrytation.helper';
 import {
   AfterInsert,
   AfterUpdate,
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -24,6 +26,10 @@ export class User {
   @CreateDateColumn() createdDate: Date;
   @UpdateDateColumn() updatedDate: Date;
 
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await Encryptation.encryptPassword(this.password);
+  }
   @AfterInsert()
   logInsert() {
     console.log('Inserted User with id', this.id);
