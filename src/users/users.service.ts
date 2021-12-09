@@ -49,6 +49,9 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
+    if (!ObjectID.isValid(id)) {
+      throw new BadRequestException('Invalid id');
+    }
     const user = await this.userRepository.findOne(id);
     if (!user) {
       throw new NotFoundException('User not found');
@@ -59,6 +62,9 @@ export class UsersService {
   }
 
   async remove(id: string) {
+    if (!ObjectID.isValid(id)) {
+      throw new BadRequestException('Invalid id');
+    }
     const user = await this.userRepository.findOne(id);
     if (!user) {
       throw new BadRequestException('User not found');

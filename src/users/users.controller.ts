@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -20,7 +21,7 @@ export class UsersController {
     return this.usersService.create(body);
   }
 
-  @Get()
+  @Get('/all')
   async findAll() {
     return this.usersService.findAll();
   }
@@ -28,6 +29,11 @@ export class UsersController {
   @Get('/:id')
   async findOneById(@Param('id') id: string) {
     return this.usersService.findOneById(id);
+  }
+
+  @Get()
+  async findByEmail(@Query('email') email: string) {
+    return this.usersService.findOneByEmail(email);
   }
 
   @Patch('/:id')
