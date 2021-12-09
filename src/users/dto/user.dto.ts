@@ -3,7 +3,7 @@ import { ObjectID } from 'typeorm';
 
 export class UserDto {
   @Expose()
-  id: ObjectID;
+  userId: ObjectID;
 
   @Expose()
   firstName: string;

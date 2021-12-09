@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ObjectID } from 'mongodb';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
@@ -49,13 +48,11 @@ export class UsersService {
   } */
 
   async findOneById(id: string) {
-    if (ObjectID.isValid(id)) {
-      const user = await this.userRepository.findOne(id);
-      if (!user) {
-        throw new NotFoundException('User not found');
-      }
-      return user;
-    } else throw new BadRequestException('Invalid id');
+    const user = await this.userRepository.findOne({ userId: id });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 
   async findOneByEmail(email: string) {
@@ -66,10 +63,7 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    if (!ObjectID.isValid(id)) {
-      throw new BadRequestException('Invalid id');
-    }
-    const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.findOne({ userId: id });
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -79,10 +73,7 @@ export class UsersService {
   }
 
   async remove(id: string) {
-    if (!ObjectID.isValid(id)) {
-      throw new BadRequestException('Invalid id');
-    }
-    const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.findOne({ userId: id });
     if (!user) {
       throw new BadRequestException('User not found');
     }
