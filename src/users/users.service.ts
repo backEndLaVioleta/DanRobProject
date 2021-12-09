@@ -21,7 +21,7 @@ export class UsersService {
 
   async create(body: CreateUserDto) {
     const users = await this.findOneByEmail(body.email);
-    if (users.length) {
+    if (users) {
       throw new BadRequestException('Email already in use');
     }
     const user = this.userRepository.create(body);
@@ -60,7 +60,9 @@ export class UsersService {
 
   async findOneByEmail(email: string) {
     if (isEmail(email)) {
-      return await this.userRepository.find({ email });
+      console.log('from service: ', await this.userRepository.find({ email }));
+      const user = await this.userRepository.findOne({ email });
+      return user;
     } else throw new BadRequestException('Not proper email format');
   }
 
