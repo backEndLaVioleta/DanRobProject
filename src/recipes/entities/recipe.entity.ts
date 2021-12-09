@@ -1,1 +1,47 @@
-export class Recipe {}
+import { Entity, ObjectIdColumn, ObjectID, Column } from 'typeorm';
+
+@Entity()
+export class Recipe {
+  @ObjectIdColumn() id: ObjectID;
+  @Column() recipeName: string;
+  @Column() description: string;
+  @Column() photo: string;
+  @Column() type: 'starters' | 'salads' | 'mains' | 'desserts';
+  // TODO: maybe add ingredients as embedded entities
+  @Column() ingredients: string[] = [];
+  @Column() extrasAvailable: string[] = [];
+  @Column() timesMade: number;
+  @Column() instructions: string;
+  @Column() prepTime: number;
+  @Column() cookTime: number;
+  @Column() totalTime: number;
+  @Column() allergens: string[] = [];
+  @Column() isVegan: boolean;
+  @Column() isVegetarian: boolean;
+  @Column() isGlutenFree: boolean;
+  @Column() isDairyFree: boolean;
+  @Column() isLactoseFree: boolean;
+  @Column() isNutFree: boolean;
+  @Column() isPescatarian: boolean;
+  @Column() isPaleo: boolean;
+  @Column() isKetogenic: boolean;
+  @Column() isQuick: boolean;
+  @Column() isHealthy: boolean;
+  @Column() isLowFodmap: boolean;
+  @Column() isSpicy: boolean;
+  @Column() isEggFree: boolean;
+  @Column() isSoyFree: boolean;
+  @Column() isFishFree: boolean;
+  @Column() isShellfishFree: boolean;
+  @Column() isPorkFree: boolean;
+  @Column() isBeefFree: boolean;
+  @Column() isAlcoholFree: boolean;
+  @Column() isClean: boolean;
+  @Column() isSustainable: boolean;
+  @Column() isLowCarb: boolean;
+  @Column() isLowSodium: boolean;
+  @Column() isLowFat: boolean;
+  @Column() isLowSugar: boolean;
+  @Column() isWheatFree: boolean;
+  @Column() onMenu: boolean;
+}

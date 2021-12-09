@@ -1,17 +1,36 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import {
+  AfterInsert,
+  AfterUpdate,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ObjectID,
+  ObjectIdColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
-
 export class User {
   @ObjectIdColumn() id: ObjectID;
   @Column() firstName: string;
   @Column() lastName: string;
-  @Column() email: string;
+  @Column({ unique: true }) email: string;
   @Column() password: string;
-  @Column() role: string;
-  @Column() creation_date?: Date;
+  @Column({ default: false }) isAdmin: boolean;
 
-  constructor(user?: Partial<User>) {
-    Object.assign(this, user);
+  // TODO: possibly allow various types of users
+  // @Column({ default: 'user' }) role: string;
+
+  @CreateDateColumn() createdDate: Date;
+  @UpdateDateColumn() updatedDate: Date;
+
+  @AfterInsert()
+  logInsert() {
+    console.log('Inserted User with id', this.id);
+  }
+
+  @AfterUpdate()
+  logUpdate() {
+    console.log('Updated User with id', this.id);
   }
 }
