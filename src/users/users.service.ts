@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -9,7 +11,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { isEmail } from 'class-validator';
-import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 
 @Injectable()
 export class UsersService {
@@ -32,7 +33,7 @@ export class UsersService {
     try {
       return await this.userRepository.find();
     } catch (error) {
-      throw new HttpExceptionFilter();
+      throw new HttpException('List not available.', HttpStatus.BAD_REQUEST);
     }
   }
   /* async findAll(order: number, limit: number) {
@@ -44,7 +45,7 @@ export class UsersService {
         take: limit,
       });
     } catch (error) {
-      throw new HttpExceptionFilter();
+      throw new HttpException('List not available.', HttpStatus.BAD_REQUEST);
     }
   } */
 
@@ -63,7 +64,11 @@ export class UsersService {
         throw new NotFoundException('User not found');
       }
       return user;
-    } else throw new BadRequestException('Not proper email format');
+    } else
+      throw new HttpException(
+        'Not proper email format',
+        HttpStatus.BAD_REQUEST,
+      );
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
@@ -79,7 +84,7 @@ export class UsersService {
   async remove(id: string) {
     const user = await this.userRepository.findOne({ userId: id });
     if (!user) {
-      throw new BadRequestException('User not found');
+      throw new NotFoundException('User not found');
     }
     return this.userRepository.remove(user);
   }
