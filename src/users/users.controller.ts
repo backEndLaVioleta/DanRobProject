@@ -6,25 +6,26 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
-//import { AuthService } from 'src/auth/auth.service';
-//import LoginUserDto from 'src/auth/dto/login.dto';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { UserDto } from './dto/user.dto';
 
 @Controller('users')
+@Serialize(UserDto)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('register')
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  @Post('/register')
+  async create(@Body() body: CreateUserDto) {
+    return this.usersService.create(body);
   }
 
-  @Get('all')
-  async findAll(): Promise<User[]> {
+  @Get('/all')
+  async findAll() {
     return this.usersService.findAll();
   }
   /* @Get()
@@ -36,22 +37,22 @@ export class UsersController {
     );
   } */
 
-  @Get(':id')
+  @Get('/:id')
   async findOneById(@Param('id') id: string) {
     return this.usersService.findOneById(id);
   }
 
-  @Get(':email')
-  async findOneByEmail(@Param('email') email: string) {
+  @Get()
+  async findByEmail(@Query('email') email: string) {
     return this.usersService.findOneByEmail(email);
   }
 
-  @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
+  @Patch('/:id')
+  async update(@Param('id') id: string, @Body() body: UpdateUserDto) {
+    return this.usersService.update(id, body);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   async remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/* eslint-disable */
+>>>>>>> 4af0c2bee7c36638d4ffe19fdf50e84a0c1b9bc5
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
