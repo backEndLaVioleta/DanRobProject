@@ -17,6 +17,7 @@ import { UserDto } from './dto/user.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginUserDto } from 'src/auth/dto/login.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { AdminUser } from 'src/interceptors/adminUser.interceptor';
 
 @Controller('users')
 @Serialize(UserDto)
@@ -49,6 +50,12 @@ export class UsersController {
       findAllUsersDto.limit,
     );
   } */
+
+  @Get('/whoami')
+  whoami(@AdminUser() user: string) {
+    console.log('hello');
+    return user;
+  }
 
   @Get('/:id')
   async findOneById(@Param('id') id: string) {
