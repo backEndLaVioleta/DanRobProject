@@ -3,6 +3,7 @@ import {
   AfterInsert,
   AfterUpdate,
   BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -29,9 +30,11 @@ export class User {
   @UpdateDateColumn() updatedDate: Date;
 
   @BeforeInsert()
+  @BeforeUpdate()
   async hashPassword() {
     this.password = await Encryptation.encryptPassword(this.password);
   }
+
   @AfterInsert()
   logInsert() {
     console.log(
