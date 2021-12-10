@@ -15,7 +15,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
 import { AuthService } from 'src/auth/auth.service';
-import { LoginUserDto } from 'src/auth/dto/login.dto';
+// import { LoginUserDto } from 'src/auth/dto/login.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
@@ -33,7 +33,7 @@ export class UsersController {
 
   @UseGuards(AuthGuard('local'))
   @Post('/login')
-  async login(@Body() body: LoginUserDto) {
+  async login(@Body() body: UserDto) {
     return this.authService.login(body);
   }
 
