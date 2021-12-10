@@ -1,26 +1,93 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Recipe } from './entities/recipe.entity';
 
 @Injectable()
 export class RecipesService {
-  create(createRecipeDto: CreateRecipeDto) {
-    return 'This action adds a new recipe';
+  constructor(
+    @InjectRepository(Recipe)
+    private recipeRepository: Repository<Recipe>,
+  ) {}
+  async create(body: CreateRecipeDto) {
+    try {
+      const recipe = this.recipeRepository.create(body);
+      console.log('This action adds a new recipe');
+      return await this.recipeRepository.save(recipe);
+    } catch (error) {
+      throw new BadRequestException({
+        statusCode: 400,
+        message: 'Bad Request',
+        error: 'Recipe not save into the DDBB',
+      });
+    }
   }
 
-  findAll() {
-    return `This action returns all recipes`;
+  async findAll() {
+    try {
+      return await this.recipeRepository.find();
+    } catch (error) {
+      throw new NotFoundException({
+        statusCode: 404,
+        message: 'List Not Found',
+        error: 'Recipe List not founded',
+      });
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} recipe`;
+  async findOne(id: string) {
+    try {
+      const recipe = await this.recipeRepository.findOne({ recipeId: id });
+      if (!recipe) {
+        throw new NotFoundException('Recipe not found');
+      }
+      return recipe;
+    } catch (error) {
+      throw new NotFoundException({
+        statusCode: 404,
+        message: 'Recipe Not Found',
+        error: 'Recipe seems to be not in the DDBB ',
+      });
+    }
   }
 
-  update(id: number, updateRecipeDto: UpdateRecipeDto) {
-    return `This action updates a #${id} recipe`;
+  async update(id: string, updateRecipeDto: UpdateRecipeDto) {
+    try {
+      const recipe = await this.recipeRepository.findOne({ recipeId: id });
+      if (!recipe) {
+        throw new NotFoundException('recipe not found');
+      }
+      Object.assign(recipe, updateRecipeDto);
+
+      return this.recipeRepository.save(recipe);
+    } catch (error) {
+      throw new BadRequestException({
+        statusCode: 400,
+        message: 'Bad Request',
+        error: 'Recipe NOT updated.',
+      });
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} recipe`;
+  async remove(id: string) {
+    try {
+      const recipe = await this.recipeRepository.findOne({ recipeId: id });
+      if (!recipe) {
+        throw new NotFoundException('Recipe not found');
+      }
+      return this.recipeRepository.remove(recipe);
+    } catch (error) {
+      throw new BadRequestException({
+        statusCode: 400,
+        message: 'Bad Request',
+        error: 'Recipe NOT deleted.',
+      });
+    }
   }
 }
