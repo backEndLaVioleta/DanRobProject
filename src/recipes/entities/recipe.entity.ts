@@ -1,4 +1,11 @@
-import { Entity, ObjectIdColumn, ObjectID, Column } from 'typeorm';
+import {
+  Entity,
+  ObjectIdColumn,
+  ObjectID,
+  Column,
+  AfterInsert,
+  AfterUpdate,
+} from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
@@ -46,4 +53,24 @@ export class Recipe {
   @Column() isLowSugar: boolean;
   @Column() isWheatFree: boolean;
   @Column() onMenu: boolean;
+
+  @AfterInsert()
+  logInsert() {
+    console.log(
+      'Inserted Recipe with MongoId',
+      this.id,
+      'and recipeId',
+      this.recipeId,
+    );
+  }
+
+  @AfterUpdate()
+  logUpdate() {
+    console.log(
+      'Inserted Recipe with MongoId',
+      this.id,
+      'and recipeId',
+      this.recipeId,
+    );
+  }
 }
