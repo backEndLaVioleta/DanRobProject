@@ -35,6 +35,12 @@ export class User {
     this.password = await Encryptation.encryptPassword(this.password);
   }
 
+  @BeforeInsert()
+  @BeforeUpdate()
+  async assignRole() {
+    this.isAdmin = false;
+  }
+
   @AfterInsert()
   logInsert() {
     console.log(
