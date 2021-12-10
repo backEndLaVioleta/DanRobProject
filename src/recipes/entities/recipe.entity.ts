@@ -1,8 +1,10 @@
 import { Entity, ObjectIdColumn, ObjectID, Column } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 export class Recipe {
   @ObjectIdColumn() id: ObjectID;
+  @Column() recipeId: string = uuidv4();
   @Column() recipeName: string;
   @Column() description: string;
   @Column() photo: string;
