@@ -6,7 +6,7 @@ import { User } from 'src/users/entities/user.entity';
 export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> {
+  canActivate(context: ExecutionContext): boolean {
     const roles = this.reflector.get<boolean>('roles', context.getHandler());
     console.log(`from roles guard roles equals: ${roles}`);
     if (roles == false) {
@@ -16,7 +16,7 @@ export class RolesGuard implements CanActivate {
     console.log(user.isAdmin, 'must show me true');
     if (user.isAdmin == roles.valueOf()) {
       const myRole = roles.valueOf();
-      return Promise.resolve(myRole);
+      return myRole;
     }
   }
 }

@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
@@ -18,7 +19,7 @@ export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
   @Post('/create')
-  @Roles(true)
+  @UseGuards(RolesGuard)
   create(@Body() createRecipeDto: CreateRecipeDto) {
     return this.recipesService.create(createRecipeDto);
   }
