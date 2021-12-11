@@ -8,10 +8,12 @@ export class RolesGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> {
     const roles = this.reflector.get<boolean>('roles', context.getHandler());
+    console.log(`from roles guard roles equals: ${roles}`);
     if (roles == false) {
       return true;
     }
     const { user }: { user: User } = context.switchToHttp().getRequest();
+    console.log(user.isAdmin, 'must show me true');
     if (user.isAdmin == roles.valueOf()) {
       const myRole = roles.valueOf();
       return Promise.resolve(myRole);
