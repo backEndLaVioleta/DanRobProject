@@ -10,12 +10,14 @@ import {
 import { RecipesService } from './recipes.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('recipes')
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
   @Post('/create')
+  @Roles(true)
   create(@Body() createRecipeDto: CreateRecipeDto) {
     return this.recipesService.create(createRecipeDto);
   }

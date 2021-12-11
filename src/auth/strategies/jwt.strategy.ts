@@ -18,6 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     //   email: payload.email,
     // };
     const user = await this.usersService.findOneByEmail(payload.email);
+    console.log(`user. ${user} from jwt strategys`);
     if (!user) throw new UnauthorizedException();
     delete user.password;
     return user;
