@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { IsNotEmpty, IsEmail, IsString, IsOptional } from 'class-validator';
 
 export class CreateUserDto {
