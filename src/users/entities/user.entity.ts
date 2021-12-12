@@ -10,13 +10,14 @@ import {
   ObjectID,
   ObjectIdColumn,
   UpdateDateColumn,
+  PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 export class User {
   @ObjectIdColumn() id: ObjectID;
-  @Column() userId: string = uuidv4();
+  @PrimaryColumn() userId: string;
   @Column() firstName: string;
   @Column() lastName: string;
   @Column({ unique: true }) email: string;
@@ -36,9 +37,13 @@ export class User {
   }
 
   @BeforeInsert()
-  @BeforeUpdate()
-  async assignRole() {
+  assignRole() {
     this.isAdmin = false;
+  }
+
+  @BeforeInsert()
+  generateUUId() {
+    this.userId = uuidv4();
   }
 
   @AfterInsert()
