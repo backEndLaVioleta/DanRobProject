@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-class Encryptation {
+export class Encryptation {
   static async encryptPassword(pass: string) {
     return await bcrypt.hash(pass, 10);
   }
@@ -9,5 +9,3 @@ class Encryptation {
     return await bcrypt.compare(pass, hash);
   }
 }
-
-export default Encryptation;

@@ -1,4 +1,4 @@
-import Encryptation from 'src/common/utilities/encrytation.helper';
+import { Encryptation } from '../../common/utilities/encryptation.helper';
 import {
   AfterInsert,
   AfterUpdate,
