@@ -1,9 +1,8 @@
 import { Expose } from 'class-transformer';
-import { ObjectID } from 'typeorm';
 
 export class UserDto {
   @Expose()
-  userId: ObjectID;
+  id: string;
 
   @Expose()
   firstName: string;

@@ -7,8 +7,8 @@ import { RecipesModule } from './recipes/recipes.module';
 import { UsersModule } from './users/users.module';
 import { MenuModule } from './menu/menu.module';
 import { OrdersModule } from './orders/orders.module';
-import { AuthModule } from './auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [

@@ -7,16 +7,15 @@ import {
   Param,
   Delete,
   Query,
-  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
+import { User } from './entities/user.entity';
+import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from '../auth/auth.service';
-// import { LoginUserDto } from 'src/auth/dto/login.dto';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 @Serialize(UserDto)
@@ -27,28 +26,21 @@ export class UsersController {
   ) {}
 
   @Post('/register')
-  async create(@Body() body: CreateUserDto) {
-    return this.usersService.create(body);
+  async signUp(@Body() createUserDto: CreateUserDto): Promise<User> {
+    const user = await this.authService.signUp(createUserDto);
+    return user;
   }
 
-  @UseGuards(AuthGuard('local'))
   @Post('/login')
-  async login(@Body() body: UserDto) {
-    return this.authService.login(body);
+  async signIn(@Body() loginUserDto: LoginUserDto): Promise<User | null> {
+    const user = await this.authService.signIn(loginUserDto);
+    return user;
   }
 
   @Get('/all')
   async findAll() {
     return this.usersService.findAll();
   }
-  /* @Get()
-  async findAll(@Body() findAllUsersDto: FindAllUsersDto) {
-    console.log(findAllUsersDto.order, findAllUsersDto.limit);
-    return this.usersService.findAll(
-      findAllUsersDto.order,
-      findAllUsersDto.limit,
-    );
-  } */
 
   @Get('/:id')
   async findOneById(@Param('id') id: string) {

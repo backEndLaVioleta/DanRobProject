@@ -8,15 +8,20 @@ import {
   ObjectIdColumn,
   UpdateDateColumn,
   PrimaryColumn,
+  BaseEntity,
+  Index,
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @ObjectIdColumn() _id: ObjectID;
   @PrimaryColumn() id: string;
   @Column() firstName: string;
   @Column() lastName: string;
-  @Column() email: string;
+
+  @Column()
+  @Index({ unique: true })
+  email: string;
   @Column() password: string;
   @Column() isAdmin: boolean;
 
@@ -28,11 +33,11 @@ export class User {
 
   @AfterInsert()
   logInsert() {
-    console.log('Inserted User with MongoId', this.id, 'and userId', this.id);
+    console.log('Inserted User with MongoId', this._id, 'and userId', this.id);
   }
 
   @AfterUpdate()
   logUpdate() {
-    console.log('Updated User with MongoId', this.id, 'and userId', this.id);
+    console.log('Updated User with MongoId', this._id, 'and userId', this.id);
   }
 }
