@@ -1,4 +1,5 @@
 import { Expose } from 'class-transformer';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 import { ObjectID } from 'typeorm';
 
 export class UserDto {
@@ -11,8 +12,11 @@ export class UserDto {
   @Expose()
   lastName: string;
 
-  @Expose()
+  @IsNotEmpty()
   email: string;
+
+  @IsString()
+  password: string;
 
   @Expose()
   createdDate: Date;

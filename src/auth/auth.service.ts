@@ -30,10 +30,16 @@ export class AuthService {
   }
 
   async login(user: UserDto) {
-    const payload = { email: user.email, role: user.isAdmin };
-    const token = this.jwtService.sign(payload);
-    return {
-      access_token: token,
-    };
+    try {
+      console.log(user);
+      const payload = { email: user.email, isAdmin: user.isAdmin };
+      console.log(payload);
+      const token = this.jwtService.sign(payload);
+      return {
+        access_token: token,
+      };
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }

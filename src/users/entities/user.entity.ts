@@ -21,7 +21,7 @@ export class User {
   @Column() lastName: string;
   @Column({ unique: true }) email: string;
   @Column() password: string;
-  @Column({ default: false }) isAdmin: boolean;
+  @Column({ type: 'boolean', default: false }) isAdmin: boolean;
 
   // TODO: possibly allow various types of users
   // @Column({ default: 'user' }) role: string;
@@ -35,11 +35,12 @@ export class User {
     this.password = await Encryptation.encryptPassword(this.password);
   }
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  async assignRole() {
-    this.isAdmin = false;
-  }
+  // @BeforeInsert()
+  // @BeforeUpdate()
+  // async assignRole() {
+  //   console.log(this.isAdmin);
+  //   this.isAdmin == false ? (this.isAdmin = false) : (this.isAdmin = true);
+  // }
 
   @AfterInsert()
   logInsert() {
@@ -48,6 +49,8 @@ export class User {
       this.id,
       'and userId',
       this.userId,
+      'and user role',
+      this.isAdmin,
     );
   }
 
