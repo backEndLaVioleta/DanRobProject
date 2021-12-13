@@ -8,7 +8,6 @@ import {
   Delete,
   Query,
   UseGuards,
-  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -46,7 +45,7 @@ export class UsersController {
   @UseGuards(AuthGuard())
   test(@GetUser() user: User) {
     //! @GetUser() -> decorator that returns the user from the request
-    console.log(user);
+    console.log('from test()', user);
 
     return user;
   }

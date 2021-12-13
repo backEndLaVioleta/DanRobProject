@@ -1,6 +1,4 @@
 import {
-  BadRequestException,
-  ConflictException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -8,12 +6,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
 import { isEmail } from 'class-validator';
 import { UserRepository } from './user.repository';
-import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
 export class UsersService {
