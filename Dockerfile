@@ -9,4 +9,4 @@ COPY --chown=node:node ./dist ./dist
 
 RUN npm ci --only=production
 
-CMD node dist/main
+CMD ["npm","run","start:prod"]
