@@ -19,11 +19,11 @@ export class Recipe {
   // TODO: maybe add ingredients as embedded entities
   @Column() ingredients: string[] = [];
   @Column() extrasAvailable: string[] = [];
-  @Column() timesMade: number;
   @Column() instructions: string;
   @Column() prepTime: number;
   @Column() cookTime: number;
   @Column() totalTime: number;
+  @Column() timesMade: number;
   @Column() allergens: string[] = [];
   @Column() isVegan: boolean;
   @Column() isVegetarian: boolean;
