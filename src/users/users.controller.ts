@@ -41,7 +41,7 @@ export class UsersController {
     return await this.authService.signIn(loginUserDto);
   }
 
-  @Post('/whoami')
+  @Get('/whoami')
   @UseGuards(AuthGuard())
   test(@GetUser() user: User) {
     //! @GetUser() -> decorator that returns the user from the request
