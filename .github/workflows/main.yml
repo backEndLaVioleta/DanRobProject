@@ -22,15 +22,22 @@ jobs:
         run: npm test
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          branch: main
+          branch: 'main'
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           healthcheck: ${{ secrets.HEROKU_APP_URL }}
-          delay: 10
-          usedocker: true
+          justlogin: true
         env:
           HD_NODE_ENV: production
           HD_MONGODB_CONNECTION_STRING: ${{ secrets.HD_MONGODB_CONNECTION_STRING }}
           HD_SECRET: ${{ secrets.HD_SECRET }}
           HD_DATABASE: ${{ secrets.HD_DATABASE }}
+      - name: "Login to heroku registry"
+        run: heroku container:login
+
+      - name: "Build and push to heroku registry"
+        run: heroku container:push web --app proyecto-rob-y-dan
+
+      - name: "Releases the container"
+        run: heroku container:release web --app proyecto-rob-y-dan
