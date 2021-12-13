@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,6 +18,8 @@ import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthService } from '../auth/auth.service';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from '../auth/get-user.decorator';
 
 @Controller('users')
 @Serialize(UserDto)
@@ -32,8 +36,18 @@ export class UsersController {
   }
 
   @Post('/login')
-  async signIn(@Body() loginUserDto: LoginUserDto): Promise<User | null> {
-    const user = await this.authService.signIn(loginUserDto);
+  async signIn(
+    @Body() loginUserDto: LoginUserDto,
+  ): Promise<{ access_token: string }> {
+    return await this.authService.signIn(loginUserDto);
+  }
+
+  @Post('/whoami')
+  @UseGuards(AuthGuard())
+  test(@GetUser() user: User) {
+    //! @GetUser() -> decorator that returns the user from the request
+    console.log(user);
+
     return user;
   }
 
