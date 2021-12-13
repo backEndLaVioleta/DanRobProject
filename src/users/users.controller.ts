@@ -15,7 +15,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
 import { AuthService } from 'src/auth/auth.service';
-// import { LoginUserDto } from 'src/auth/dto/login.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 
@@ -32,9 +31,9 @@ export class UsersController {
     return this.usersService.create(body);
   }
 
+  @Post('/login')
   @UseGuards(AuthGuard('local'))
   @Roles(true)
-  @Post('/login')
   async login(@Body() body: UserDto) {
     return this.authService.login(body);
   }

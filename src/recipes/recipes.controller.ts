@@ -19,7 +19,7 @@ export class RecipesController {
 
   @Post('/create')
   @UseGuards(RolesGuard)
-  // @Roles(true)
+  @Roles(true)
   create(@Body() createRecipeDto: CreateRecipeDto) {
     return this.recipesService.create(createRecipeDto);
   }
