@@ -5,7 +5,6 @@ USER node
 WORKDIR /usr/src/app
 
 COPY --chown=node:node package* /usr/src/app/
-COPY --chown=node:node .env /usr/src/app/
 COPY --chown=node:node ./dist ./dist
 
 RUN npm ci --only=production
