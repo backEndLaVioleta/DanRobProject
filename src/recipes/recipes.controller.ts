@@ -11,15 +11,14 @@ import {
 import { RecipesService } from './recipes.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { AuthGuard } from '@nestjs/passport';
+
 @Controller('recipes')
+@UseGuards(AuthGuard())
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
   @Post('/create')
-  @UseGuards(RolesGuard)
-  @Roles(true)
   create(@Body() createRecipeDto: CreateRecipeDto) {
     return this.recipesService.create(createRecipeDto);
   }

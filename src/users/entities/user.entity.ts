@@ -1,27 +1,29 @@
-import Encryptation from 'src/common/utilities/encrytation.helper';
 import {
   AfterInsert,
   AfterUpdate,
-  BeforeInsert,
-  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
   ObjectID,
   ObjectIdColumn,
   UpdateDateColumn,
+  PrimaryColumn,
+  BaseEntity,
+  Index,
 } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
-export class User {
-  @ObjectIdColumn() id: ObjectID;
-  @Column() userId: string = uuidv4();
+export class User extends BaseEntity {
+  @ObjectIdColumn() _id: ObjectID;
+  @PrimaryColumn() id: string;
   @Column() firstName: string;
   @Column() lastName: string;
-  @Column({ unique: true }) email: string;
+
+  @Column()
+  @Index({ unique: true })
+  email: string;
   @Column() password: string;
-  @Column({ type: 'boolean', default: false }) isAdmin: boolean;
+  @Column() isAdmin: boolean;
 
   // TODO: possibly allow various types of users
   // @Column({ default: 'user' }) role: string;
@@ -29,38 +31,13 @@ export class User {
   @CreateDateColumn() createdDate: Date;
   @UpdateDateColumn() updatedDate: Date;
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  async hashPassword() {
-    this.password = await Encryptation.encryptPassword(this.password);
-  }
-
-  // @BeforeInsert()
-  // @BeforeUpdate()
-  // async assignRole() {
-  //   console.log(this.isAdmin);
-  //   this.isAdmin == false ? (this.isAdmin = false) : (this.isAdmin = true);
-  // }
-
   @AfterInsert()
   logInsert() {
-    console.log(
-      'Inserted User with MongoId',
-      this.id,
-      'and userId',
-      this.userId,
-      'and user role',
-      this.isAdmin,
-    );
+    console.log('Inserted User with MongoId', this._id, 'and userId', this.id);
   }
 
   @AfterUpdate()
   logUpdate() {
-    console.log(
-      'Updated User with MongoId',
-      this.id,
-      'and userId',
-      this.userId,
-    );
+    console.log('Updated User with MongoId', this._id, 'and userId', this.id);
   }
 }

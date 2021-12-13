@@ -1,51 +1,47 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import Encryptation from 'src/common/utilities/encrytation.helper';
-import { UserDto } from 'src/users/dto/user.dto';
-import { UsersService } from 'src/users/users.service';
-import { LoginUserDto } from './dto/login.dto';
-// import { LoginUserDto } from './dto/login.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { LoginUserDto } from '../users/dto/login-user.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { User } from '../users/entities/user.entity';
+import { UserRepository } from '../users/user.repository';
+import { JwtPayload } from './jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
+  private logger = new Logger('AuthService');
   constructor(
-    // @Inject(forwardRef(() => UsersService))
-    private userService: UsersService,
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, pass: string) {
-    const user = await this.userService.findOneByEmail(email);
-    console.log('from authService validateUser:', user);
-    if (!user) return null;
-    const isValidPassword = await Encryptation.comparePassword(
-      pass,
-      user.password,
-    );
-    if (isValidPassword) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { ...result } = user;
-      console.log(result, 'result from validateUser authservice');
-      return result;
-    }
-    return null;
+  async signUp(createUserDto: CreateUserDto): Promise<User> {
+    //* with a unique index on email in MongoDB, this check is not needed (saves a query)
+    // const users = await this.userRepository.find({
+    //   email: createUserDto.email,
+    // });
+    // if (users.length) {
+    //   throw new ConflictException('Email already in use');
+    // }
+    const user = await this.userRepository.signUp(createUserDto);
+
+    return user;
   }
 
-  async login(user: LoginUserDto) {
-    try {
-      console.log('from login user, authservice', user);
-      const checkedUser = await this.validateUser(user.email, user.password);
-      const payload = {
-        email: checkedUser.email,
-        isAdmin: checkedUser.isAdmin,
-      };
-      console.log(payload);
-      const token = this.jwtService.sign(payload);
-      return {
-        access_token: token,
-      };
-    } catch (error) {
-      throw new Error(error.message);
-    }
+  async signIn(loginUserDto: LoginUserDto): Promise<{ access_token: string }> {
+    const { email, password } = loginUserDto;
+
+    const user = await this.userRepository.signIn(email, password);
+
+    const payload: JwtPayload = {
+      email: user.email,
+    };
+    const access_token = this.jwtService.sign(payload);
+    this.logger.debug(
+      `Generated JWT Token with payload ${JSON.stringify(payload)}`,
+    );
+
+    return { access_token };
   }
 }

@@ -12,11 +12,13 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
-import { AuthService } from 'src/auth/auth.service';
+import { User } from './entities/user.entity';
+import { LoginUserDto } from './dto/login-user.dto';
+import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '@nestjs/passport';
-import { Roles } from 'src/auth/decorators/roles.decorator';
+import { GetUser } from '../auth/get-user.decorator';
 
 @Controller('users')
 @Serialize(UserDto)
@@ -27,29 +29,31 @@ export class UsersController {
   ) {}
 
   @Post('/register')
-  async create(@Body() body: CreateUserDto) {
-    return this.usersService.create(body);
+  async signUp(@Body() createUserDto: CreateUserDto): Promise<User> {
+    const user = await this.authService.signUp(createUserDto);
+    return user;
   }
 
   @Post('/login')
-  @UseGuards(AuthGuard('local'))
-  @Roles(true)
-  async login(@Body() body: UserDto) {
-    return this.authService.login(body);
+  async signIn(
+    @Body() loginUserDto: LoginUserDto,
+  ): Promise<{ access_token: string }> {
+    return await this.authService.signIn(loginUserDto);
+  }
+
+  @Get('/whoami')
+  @UseGuards(AuthGuard())
+  test(@GetUser() user: User) {
+    //! @GetUser() -> decorator that returns the user from the request
+    console.log('from test()', user);
+
+    return user;
   }
 
   @Get('/all')
   async findAll() {
     return this.usersService.findAll();
   }
-  /* @Get()
-  async findAll(@Body() findAllUsersDto: FindAllUsersDto) {
-    console.log(findAllUsersDto.order, findAllUsersDto.limit);
-    return this.usersService.findAll(
-      findAllUsersDto.order,
-      findAllUsersDto.limit,
-    );
-  } */
 
   @Get('/:id')
   async findOneById(@Param('id') id: string) {
