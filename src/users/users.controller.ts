@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   UseGuards,
+  Logger,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -23,6 +24,7 @@ import { GetUser } from '../auth/get-user.decorator';
 @Controller('users')
 @Serialize(UserDto)
 export class UsersController {
+  private logger = new Logger('UsersController');
   constructor(
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
@@ -31,6 +33,8 @@ export class UsersController {
   @Post('/register')
   async signUp(@Body() createUserDto: CreateUserDto): Promise<User> {
     const user = await this.authService.signUp(createUserDto);
+    this.logger.verbose(`User ${user.email} registered`);
+
     return user;
   }
 
