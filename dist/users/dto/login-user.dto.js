@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginUserDto = void 0;
 const class_validator_1 = require("class-validator");
-class LoginUserDto {
-}
+const graphql_1 = require("@nestjs/graphql");
+let LoginUserDto = class LoginUserDto {
+};
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsEmail)(),
+    (0, graphql_1.Field)(),
     __metadata("design:type", String)
 ], LoginUserDto.prototype, "email", void 0);
 __decorate([
@@ -26,11 +28,15 @@ __decorate([
     (0, class_validator_1.Matches)(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
         message: 'invalid credentials',
     }),
+    (0, graphql_1.Field)(),
     __metadata("design:type", String)
 ], LoginUserDto.prototype, "password", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], LoginUserDto.prototype, "role", void 0);
+LoginUserDto = __decorate([
+    (0, graphql_1.InputType)()
+], LoginUserDto);
 exports.LoginUserDto = LoginUserDto;
 //# sourceMappingURL=login-user.dto.js.map

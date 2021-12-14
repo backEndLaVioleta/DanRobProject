@@ -28,9 +28,11 @@ let UsersController = class UsersController {
     constructor(usersService, authService) {
         this.usersService = usersService;
         this.authService = authService;
+        this.logger = new common_1.Logger('UsersController');
     }
     async signUp(createUserDto) {
         const user = await this.authService.signUp(createUserDto);
+        this.logger.verbose(`User ${user.email} registered`);
         return user;
     }
     async signIn(loginUserDto) {
