@@ -17,6 +17,11 @@ const common_1 = require("@nestjs/common");
 const recipes_service_1 = require("./recipes.service");
 const create_recipe_dto_1 = require("./dto/create-recipe.dto");
 const update_recipe_dto_1 = require("./dto/update-recipe.dto");
+const roles_decorator_1 = require("../auth/roles/roles.decorator");
+const roles_enum_1 = require("../auth/roles/roles.enum");
+const jwt_auth_strategy_1 = require("../auth/jwt-auth.strategy");
+const roles_guard_1 = require("../auth/roles/roles.guard");
+const swagger_1 = require("@nestjs/swagger");
 let RecipesController = class RecipesController {
     constructor(recipesService) {
         this.recipesService = recipesService;
@@ -45,6 +50,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], RecipesController.prototype, "create", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_strategy_1.JwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, roles_decorator_1.Roles)(roles_enum_1.Role.Admin),
     (0, common_1.Get)('/all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),

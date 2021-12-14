@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   AfterInsert,
   AfterUpdate,
@@ -23,10 +24,12 @@ export class User extends BaseEntity {
   @Index({ unique: true })
   email: string;
   @Column() password: string;
-  @Column() isAdmin: boolean;
+  // @Column() isAdmin: boolean;
 
   // TODO: possibly allow various types of users
-  // @Column({ default: 'user' }) role: string;
+  @ApiProperty({ example: 'user' })
+  @Column({ default: 'user' })
+  role: string;
 
   @CreateDateColumn() createdDate: Date;
   @UpdateDateColumn() updatedDate: Date;

@@ -33,14 +33,14 @@ const uuid_1 = require("uuid");
 const common_1 = require("@nestjs/common");
 let UserRepository = class UserRepository extends typeorm_1.Repository {
     async signUp(createUserDto) {
-        const { firstName, lastName, email, password } = createUserDto;
+        const { firstName, lastName, email, password, role } = createUserDto;
         const user = this.create();
         user.id = (0, uuid_1.v4)();
         user.firstName = firstName;
         user.lastName = lastName;
         user.email = email;
         user.password = await this.hashPassword(password);
-        user.isAdmin = true;
+        user.role = role;
         try {
             return await this.save(user);
         }

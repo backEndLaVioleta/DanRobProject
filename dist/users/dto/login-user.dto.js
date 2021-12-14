@@ -29,9 +29,8 @@ __decorate([
     __metadata("design:type", String)
 ], LoginUserDto.prototype, "password", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], LoginUserDto.prototype, "isAdmin", void 0);
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], LoginUserDto.prototype, "role", void 0);
 exports.LoginUserDto = LoginUserDto;
 //# sourceMappingURL=login-user.dto.js.map

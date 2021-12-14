@@ -6,7 +6,7 @@ export declare class User extends BaseEntity {
     lastName: string;
     email: string;
     password: string;
-    isAdmin: boolean;
+    role: string;
     createdDate: Date;
     updatedDate: Date;
     logInsert(): void;

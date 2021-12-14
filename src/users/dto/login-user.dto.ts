@@ -5,8 +5,7 @@ import {
   MinLength,
   MaxLength,
   Matches,
-  IsOptional,
-  IsBoolean,
+  // IsBoolean,
 } from 'class-validator';
 
 export class LoginUserDto {
@@ -23,7 +22,9 @@ export class LoginUserDto {
   })
   readonly password: string;
 
-  @IsOptional()
-  @IsBoolean()
-  readonly isAdmin: boolean;
+  // @IsNotEmpty()
+  @IsString()
+  readonly role: string;
+  // @IsBoolean()
+  // readonly isAdmin: boolean;
 }

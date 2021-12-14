@@ -31,9 +31,12 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         const user = await this.userRepository.findOne({
             where: { email },
         });
+        console.log(user);
         if (!user) {
             throw new common_1.UnauthorizedException('User not found');
         }
+        delete user.password;
+        console.log(user);
         return user;
     }
 };

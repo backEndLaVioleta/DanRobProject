@@ -27,4 +27,7 @@ export class CreateUserDto {
     message: 'password too weak',
   })
   readonly password: string;
+
+  @IsString()
+  readonly role: string;
 }
