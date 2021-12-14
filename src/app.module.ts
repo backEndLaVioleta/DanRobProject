@@ -7,7 +7,6 @@ import { RecipesModule } from './recipes/recipes.module';
 import { UsersModule } from './users/users.module';
 import { MenuModule } from './menu/menu.module';
 import { OrdersModule } from './orders/orders.module';
-import { AuthModule } from './auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
 import configuration from './config/config';
 
@@ -27,7 +26,7 @@ import configuration from './config/config';
     UsersModule,
     MenuModule,
     OrdersModule,
-    AuthModule,
+    // AuthModule,
   ],
   controllers: [AppController],
   providers: [

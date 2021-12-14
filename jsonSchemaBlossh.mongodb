@@ -5,213 +5,458 @@ use('Blossh');
   validator: {
     $jsonSchema: {
       // validation colection
-      bsonType: "object",
-      required: ["email", "password", "role"],
+      bsonType: 'object',
+      required: ['email', 'password', 'role'],
       additionalProperties: true,
       properties: {
         _id: {
-          bsonType: "objectId",
-          description: "objectId is the hex decimal in Mongodb. Check documentation"
+          bsonType: 'objectId',
+          description: 'objectId is the hex decimal in Mongodb. Check documentation'
         },
         firstName: {
-          bsonType: "string",
-          description: "must be a string. Optional"
+          bsonType: 'string',
+          description: 'must be a string. Optional'
         },
         lastName: {
-          bsonType: "string",
-          description: "must be a string. Optional"
+          bsonType: 'string',
+          description: 'must be a string. Optional'
         },
         email: {
-          bsonType : "string",
-          pattern : "[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+",
-          description: "must be a string and match the regular expression pattern. Required"
+          bsonType : 'string',
+          pattern : '[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+',
+          description: 'must be a string and match the regular expression pattern. Required'
         }, 
         password: {
-            bsonType: "string",
-            description: "It would be hashed when user creation. Required"
+            bsonType: 'string',
+            description: 'It would be hashed when user creation. Required'
         },
         role: {
-          enum: ["admin", "user"],
-          description: " There are only two options and is required to eine our user's rights"
+          enum: ['admin', 'user'],
+          description: ' There are only two options and is required to eine our user's rights'
         }
       }
     }
   }
 });*/
 /* db.users.insertOne({
-     firstName : "John",
-    lastName : "Wick",
-    email: "hello@hello.com",
-    password: "johnWick1234",
-    role: "user"
+     firstName : 'John',
+    lastName : 'Wick',
+    email: 'hello@hello.com',
+    password: 'johnWick1234',
+    role: 'user'
 }); */
 
 /*db.createCollection('recipes', {
 
     validator: {
         $jsonSchema: {
-            bsonType: "object",
-            required: ["recipe_name", "ingredients", "dish_type"],
+            bsonType: 'object',
+            required: ['recipe_name', 'ingredients', 'dish_type'],
             additionalProperties: true,
             properties: {
                 _id: {
-                    bsonType: "objectId",
-                    description: "Mongodb hex system of id"
+                    bsonType: 'objectId',
+                    description: 'Mongodb hex system of id'
                 },
                 recipe_name: {
-                    bsonType: "string",
-                    description: "must be a string. Required"
+                    bsonType: 'string',
+                    description: 'must be a string. Required'
                 },
                 ingredients: {
-                    bsonType: "array",
+                    bsonType: 'array',
                     minItems: 1,
                     items: {
-                        bsonType: "object",
-                        required: ["ingredient", "servings", "quantity","measure" , "allergens"],
+                        bsonType: 'object',
+                        required: ['ingredient', 'servings', 'quantity','measure' , 'allergens'],
                         additionalProperties: true,
-                        description: "'ingredients' cannot have all these fields empty ",
+                        description: ''ingredients' cannot have all these fields empty ',
                         properties: {
                             ingredient: {
-                                bsonType: "string",
-                                description: "name of the ingredient in the recipe. Must be a string. Required"
+                                bsonType: 'string',
+                                description: 'name of the ingredient in the recipe. Must be a string. Required'
                             },
                             servings: {
-                                bsonType: ["int", "double"],
-                                description: "For how many people or portions are all the ingredients units thought for. Required"
+                                bsonType: ['int', 'double'],
+                                description: 'For how many people or portions are all the ingredients units thought for. Required'
                             },
                             quantity: {
-                                bsonType: ["int", "double", "decimal"],
-                                description: "'quantity' goes alongside with measure. Required"
+                                bsonType: ['int', 'double', 'decimal'],
+                                description: ''quantity' goes alongside with measure. Required'
                             },
                             measure: {
-                                enum: ["tsp", "Tbsp", "cup", "ounce", "pound", "USgl", "each", "g", "kg", "cl", "l", "piece", "slice"],
-                                description: "Given enum to pick up one. Goes alongside quantity. Required"
+                                enum: ['tsp', 'Tbsp', 'cup', 'ounce', 'pound', 'USgl', 'each', 'g', 'kg', 'cl', 'l', 'piece', 'slice'],
+                                description: 'Given enum to pick up one. Goes alongside quantity. Required'
                             },
                             ingredients: {
-                                bsonType: "array",
+                                bsonType: 'array',
                                 items: {
-                                    bsonType: "string",
-                                    description: "array to place the possible ingredients",
+                                    bsonType: 'string',
+                                    description: 'array to place the possible ingredients',
                                 }
                             },
                             allergens: {
-                                bsonType: "array",
+                                bsonType: 'array',
                                 items: {
-                                    bsonType: "string",
-                                    description: "array to place the possible allegerns in the ingredients. If none, 'none' must be writen. Required",
+                                    bsonType: 'string',
+                                    description: 'array to place the possible allegerns in the ingredients. If none, 'none' must be writen. Required',
                                 }
                             }
                         }
                     }
                 },
                 recipe_description: {
-                    bsonType: "string",
-                    description: "must be a description of the recipe"
+                    bsonType: 'string',
+                    description: 'must be a description of the recipe'
                 },
                 instructions: {
-                    bsonType: "string",
-                    description: "an explanation of how to make the recipe || dish"
+                    bsonType: 'string',
+                    description: 'an explanation of how to make the recipe || dish'
                 },
                 cooking_time_minutes: {
-                    bsonType: ["int", "double", "decimal"],
-                    description: "must be a number. Indicates how many minutes the recipe needs to be cooked | ready"
+                    bsonType: ['int', 'double', 'decimal'],
+                    description: 'must be a number. Indicates how many minutes the recipe needs to be cooked | ready'
                 },
                 photo: {
-                    bsonType: "string",
-                    description: "an uri or url for the recipe image"
+                    bsonType: 'string',
+                    description: 'an uri or url for the recipe image'
                 },
                 dish_type: {
-                    enum: ["starter", "salad", "main", "dessert"],
-                    description: "must be one of the types described above. Required"
+                    enum: ['starter', 'salad', 'main', 'dessert'],
+                    description: 'must be one of the types described above. Required'
                 },
                 extras_available: {
-                    bsonType: "array",
-                    description: "an array of the given extras for every recipe."
+                    bsonType: 'array',
+                    description: 'an array of the given extras for every recipe.'
                 },
                 times_made: {
-                    bsonType: ["int", "double", "decimal"],
-                    description: "ask Dan"
+                    bsonType: ['int', 'double', 'decimal'],
+                    description: 'ask Dan'
                 },
                 on_menu: {
-                    type: "boolean",
-                    description: "a boolean that indicates if the recipe is available for clients | users to picjup for their orders."
+                    type: 'boolean',
+                    description: 'a boolean that indicates if the recipe is available for clients | users to picjup for their orders.'
                 }
             }
 
         }
     }
 });*/
- /*db.recipes.insertOne({
-    recipe_name: "baby spinach salad",
+/*db.recipes.insertOne({
+    recipe_name: 'baby spinach salad',
     ingredients: [
         {
-        ingredient: "baby spinach leaves",
+        ingredient: 'baby spinach leaves',
         servings: 1,
         quantity: 2,
-        measure: "cup",
-        allergens: ["none"]
+        measure: 'cup',
+        allergens: ['none']
         },
         {
-        ingredient: "pear",
+        ingredient: 'pear',
         servings: 1,
         quantity: 0.5,
-        measure: "piece",
-        allergens: ["none"]
+        measure: 'piece',
+        allergens: ['none']
         },
         {
-        ingredient: "pear",
+        ingredient: 'pear',
         servings: 1,
         quantity: 3,
-        measure: "slice",
-        allergens: ["none"]
+        measure: 'slice',
+        allergens: ['none']
         },
         {
-        ingredient: "slided parmigiano-reggiano cheese",
+        ingredient: 'slided parmigiano-reggiano cheese',
         servings: 1,
         quantity: 10,
-        measure: "g",
-        allergens: ["milk"]
+        measure: 'g',
+        allergens: ['milk']
         },
         {
-        ingredient: "honey mustard sauce",
+        ingredient: 'honey mustard sauce',
         servings: 1,
         quantity: 7,
-        measure: "cl",
-        ingredients: ["mayonnaise", "honey", "dijon mustard", "yellow mustard", " apple cidder vinegar", "garlic powder", "paprika", "salt", "freshly craked pepper"],
-        allergens: ["egg", "seeds", "mustard", "traces of nuts"]
+        measure: 'cl',
+        ingredients: ['mayonnaise', 'honey', 'dijon mustard', 'yellow mustard', ' apple cidder vinegar', 'garlic powder', 'paprika', 'salt', 'freshly craked pepper'],
+        allergens: ['egg', 'seeds', 'mustard', 'traces of nuts']
         },
         {
-        ingredient: "guacamole",
+        ingredient: 'guacamole',
         servings: 1,
         quantity: 1,
-        measure: "Tbsp",
-        ingredients: ["avocado", "lemon juice", "red onions", "salt", "corianter"],
-        allergens: ["none"]
+        measure: 'Tbsp',
+        ingredients: ['avocado', 'lemon juice', 'red onions', 'salt', 'corianter'],
+        allergens: ['none']
         },
         {
-        ingredient: "radish",
+        ingredient: 'radish',
         servings: 1,
         quantity: 3,
-        measure: "slice",
-        allergens: ["none"]
+        measure: 'slice',
+        allergens: ['none']
         },
         {
-        ingredient: "fried onion",
+        ingredient: 'fried onion',
         servings: 1,
         quantity: 1,
-        measure: "Tbsp",
-        allergens: ["none"]
+        measure: 'Tbsp',
+        allergens: ['none']
         }
     ],
-    description: "a fresh, light, balanced salad",
-    instructions: "add the two cups of spinachs ina a bol. Chopped the pear's half piece into cubes. Add them to the bowl among the honesy mustard sauce and the parmeggiano chez. Mixed gently. Take an empty dish and place in the middle the guacamole's scoop. Add the content of the bol. On top of the salad add the fried onion, the slices of pear and radish and a last touch of sliced parmeggiano chez ",
+    description: 'a fresh, light, balanced salad',
+    instructions: 'add the two cups of spinachs ina a bol. Chopped the pear's half piece into cubes. Add them to the bowl among the honesy mustard sauce and the parmeggiano chez. Mixed gently. Take an empty dish and place in the middle the guacamole's scoop. Add the content of the bol. On top of the salad add the fried onion, the slices of pear and radish and a last touch of sliced parmeggiano chez ',
     cooking_time_minutes: 8,
-    photo: "image/png",
-    dish_type: "salad",
-    extras_available: ["sliced parmesan chez", "granted parmesan chez", "pear", "radish", "honey mustard sauce", "fried onions", "radish", "cranberries", "bacon"],
+    photo: 'image/png',
+    dish_type: 'salad',
+    extras_available: ['sliced parmesan chez', 'granted parmesan chez', 'pear', 'radish', 'honey mustard sauce', 'fried onions', 'radish', 'cranberries', 'bacon'],
     times_made: 10,
     on_menu: true
-});*/  
+});*/ 
+db.createCollection('recipes', {
+
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['recipeName', 'ingredients', 'dish_type'],
+            additionalProperties: true,
+            properties: {
+                _id: {
+                    bsonType: 'objectId',
+                    description: 'Mongodb hex system of id'
+                },
+                recipeId: {
+                    bsonType: 'string',
+                    default: uuidv4(),
+                    description: 'MongoDb UUID for perpetual reference'
+                },
+                recipeName: {
+                    bsonType: 'string',
+                    description: 'must be a string. Required'
+                },
+                description: {
+                    bsonType: 'string',
+                    description: 'must be a description of the recipe'
+                },
+                photo: {
+                    bsonType: 'string',
+                    description: 'an uri or url for the recipe image'
+                },
+                type: {
+                    enum: ['starters', 'salads', 'mains', 'desserts'],
+                    description: 'must be one of the types described above. Required'
+                },
+                ingredients: {
+                    bsonType: 'array',
+                    minItems: 1,
+                },
+                extrasAvailable: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'string',
+                        description: 'an array of the given extras for every recipe.'
+                    }
+                },
+                instructions: {
+                    bsonType: 'string',
+                    description: 'an explanation of how to make the recipe || dish'
+                },
+                prepTime: {
+                    bsonType: ['int', 'double', 'decimal'],
+                    description: 'must be a number. Indicates how long to prepare ingredients for recipe'
+                },
+                cookTime: {
+                    bsonType: ['int', 'double', 'decimal'],
+                    description: 'must be a number. Indicates how many minutes the recipe needs to be cooked | ready'
+                },
+                totalTime: {
+                    bsonType: ['int', 'double', 'decimal'],
+                    description: 'must be a number. Indicates total time to get recipe done'
+                },
+                timesMade: {
+                    bsonType: ['int', 'double', 'decimal'],
+                    description: 'ask Dan'
+                },
+                allergens: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'string',
+                        description: 'List of allergens that might be included in the recipe'
+                    }
+                },
+                isVegan: {
+                    bsonType: 'boolean',
+                    description: 'vegan free'
+                },
+                isVegetarian: {
+                    bsonType: 'boolean',
+                    description: 'vegatarian free'
+                },
+                isGlutenFree: {
+                    bsonType: 'boolean',
+                    description: 'glutenFree free'
+                },
+                isDairyFree: {
+                    bsonType: 'boolean',
+                    description: 'dairy free'
+                },
+                isLactoseFree: {
+                    bsonType: 'boolean',
+                    description: 'lactose free'
+                },
+                isNutFree: {
+                    bsonType: 'boolean',
+                    description: 'nuts'
+                },
+                isPescatarianFree: {
+                    bsonType: 'boolean',
+                    description: 'fish free'
+                },
+                isPaleo: {
+                    bsonType: 'boolean',
+                    description: 'paleo choice'
+                },
+                isKetogenic: {
+                    bsonType: 'boolean',
+                    description: 'ketogenic choice'
+                },
+                isQuick: {
+                    bsonType: 'boolean',
+                    description: 'is it now?'
+                },
+                isHealthy: {
+                    bsonType: 'boolean',
+                    description: 'healthy choice'
+                },
+                isSlowFoodmap: {
+                    bsonType: 'boolean',
+                    description: 'slow food'
+                },
+                isSpicy: {
+                    bsonType: 'boolean',
+                    description: 'spicy choice'
+                },
+                isEggFree: {
+                    bsonType: 'boolean',
+                    description: 'egg free'
+                },
+                isFishFree: {
+                    bsonType: 'boolean',
+                    description: 'fish free'
+                },
+                isShellfishFree: {
+                    bsonType: 'boolean',
+                    description: 'shellfish free'
+                },
+                isPorkFree: {
+                    bsonType: 'boolean',
+                    description: 'pork free'
+                },
+                isBeefFree: {
+                    bsonType: 'boolean',
+                    description: 'beef free'
+                },
+                isAlcoholFree: {
+                    bsonType: 'boolean',
+                    description: 'alcohol free'
+                },
+                isClean: {
+                    bsonType: 'boolean',
+                    description: 'clean choice'
+                },
+                isSustainable: {
+                    bsonType: 'boolean',
+                    description: 'sustainable choice'
+                },
+                isLowCarb: {
+                    bsonType: 'boolean',
+                    description: 'low carb'
+                },
+                isLowSodium: {
+                    bsonType: 'boolean',
+                    description: 'low salt'
+                },
+                isLowFat: {
+                    bsonType: 'boolean',
+                    description: 'low fat'
+                },
+                isLowSugar: {
+                    bsonType: 'boolean',
+                    description: 'low sugar'
+                },
+                isWheatFree: {
+                    bsonType: 'boolean',
+                    description: 'wheat free'
+                },
+                onMenu: {
+                    type: 'boolean',
+                    description: 'a boolean that indicates if the recipe is available for clients | users to picjup for their orders.'
+                }
+            }
+
+        }
+    }
+});
+
+db.createCollection('menu', {
+
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['menuItemName', 'menuItemPhoto', 'menuItemPrice', 'menuItemAllergens' ],
+            properties: {
+                _id: {
+                    bsonType: 'objectId',
+                    description: 'Mongodb hex system of id'
+                },
+                recipeId: {
+                    bsonType: 'string',
+                    default: uuidv4(),
+                    description: 'MongoDb UUID for perpetual reference'
+                },
+                type: {
+                    bsontype: 'string',
+                    description: 'what kind of dish: starter, salad, main or dessert'
+                },
+                menuItemDescripton: {
+                    bsontype: 'string',
+                    description: 'description of the dish'
+                },
+                menuItemPhoto: {
+                    bsontype: 'string',
+                    description: 'photo url ddbb'
+                },
+                menuItemType: {
+                    bsontype: 'string',
+                    description: 'to discusse with dan'
+                },
+                menuItemPrice: {
+                    bsontype: ['int', 'decimal'],
+                    description: 'description of the dish'
+                },
+                menuItemDescripton: {
+                    bsontype: 'string',
+                    description: 'description of the dish'
+                },
+                menuItemAllergens: {
+                    bsontype: 'array',
+                    items: {
+                        bsonType: 'string',
+                        description: 'list of the allergens'
+                    }
+                },
+                menuItemExtrasAvailable: {
+                    bsontype: 'array',
+                    items: {
+                        bsonType: 'string',
+                        description: 'list of the extras'
+                    }
+                },
+            }
+
+        }
+    }
+});
+  
  //db.getCollection('users').find({})
  //db.getCollection('recipes').find({})
  //db.recipes.drop();
