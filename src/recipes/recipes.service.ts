@@ -3,13 +3,22 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.strategy';
+import { Roles } from 'src/auth/roles/roles.decorator';
+import { Role } from 'src/auth/roles/roles.enum';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { RecipeRepository } from './recipe.repository';
 
 @Injectable()
+@UseGuards(JwtAuthGuard, RolesGuard)
+@ApiBearerAuth('access-token')
+@Roles(Role.Admin)
 export class RecipesService {
   constructor(
     @InjectRepository(RecipeRepository)

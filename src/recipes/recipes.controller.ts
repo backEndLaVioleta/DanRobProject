@@ -19,8 +19,6 @@ import { Serialize } from '../interceptors/serialize.interceptor';
 @Controller('recipes')
 @Serialize(RecipeDto)
 @UseGuards(AuthGuard())
-// TODO use of roles()
-// can't find the way with boolean
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 

@@ -23,13 +23,11 @@ let RolesGuard = class RolesGuard {
             context.getHandler(),
             context.getClass(),
         ]);
-        console.log(roles);
         if (!roles) {
             return true;
         }
         const { user } = context.switchToHttp().getRequest();
         const myRole = roles.some((role) => { var _a; return (_a = user.role) === null || _a === void 0 ? void 0 : _a.includes(role); });
-        console.log(myRole);
         return Promise.resolve(myRole);
     }
 };
