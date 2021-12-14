@@ -1,47 +1,51 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
   UseGuards,
 } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
-import { CreateRecipeDto } from './dto/create-recipe.dto';
-import { UpdateRecipeDto } from './dto/update-recipe.dto';
+
 import { AuthGuard } from '@nestjs/passport';
+import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { CreateRecipeDto } from './dto/create-recipe.dto';
+import { RecipeDto } from './dto/recipe.dto';
+import { Serialize } from '../interceptors/serialize.interceptor';
 
 @Controller('recipes')
+@Serialize(RecipeDto)
 @UseGuards(AuthGuard())
 // TODO use of roles()
 // can't find the way with boolean
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
-  @Post('/create')
-  create(@Body() createRecipeDto: CreateRecipeDto) {
-    return this.recipesService.create(createRecipeDto);
-  }
-
-  @Get('/all')
+  @Get('/')
   findAll() {
     return this.recipesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.recipesService.findOne(id);
+  @Get('/:id')
+  async findOneById(@Param('id') id: string) {
+    return this.recipesService.findOneById(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
-    return this.recipesService.update(id, updateRecipeDto);
+  @Post()
+  async saveRecipe(@Body() body: CreateRecipeDto) {
+    return this.recipesService.saveRecipe(body);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.recipesService.remove(id);
+  @Patch('/:id')
+  async updateRecipe(@Param('id') id: string, @Body() body: UpdateRecipeDto) {
+    return this.recipesService.updateRecipe(id, body);
+  }
+
+  @Delete('/:id')
+  async removeRecipe(@Param('id') id: string) {
+    return this.recipesService.removeRecipe(id);
   }
 }

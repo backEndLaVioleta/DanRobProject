@@ -9,6 +9,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { isEmail } from 'class-validator';
 import { UserRepository } from './user.repository';
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './entities/user.entity';
+import { AuthService } from '../auth/auth.service';
+import { LoginUserDto } from './dto/login-user.dto';
+import { AccessTokenType } from 'src/auth/access-token.type';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +21,17 @@ export class UsersService {
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
+    private authService: AuthService,
   ) {}
+
+  async signUp(createUserDto: CreateUserDto): Promise<User> {
+    const user = await this.userRepository.signUp(createUserDto);
+    return user;
+  }
+
+  async signIn(loginUserDto: LoginUserDto): Promise<AccessTokenType> {
+    return await this.authService.signIn(loginUserDto);
+  }
 
   async findAll() {
     try {
@@ -25,18 +40,6 @@ export class UsersService {
       throw new HttpException('List not available.', HttpStatus.BAD_REQUEST);
     }
   }
-  /* async findAll(order: number, limit: number) {
-    console.log(`my oder: ${order}, my limit: ${limit}`);
-    try {
-      const sort = order ? 'ASC' : 'DESC';
-      return await this.userRepository.find({
-        order: { firstName: sort },
-        take: limit,
-      });
-    } catch (error) {
-      throw new HttpException('List not available.', HttpStatus.BAD_REQUEST);
-    }
-  } */
 
   async findOneById(id: string) {
     const user = await this.userRepository.findOne({ id });
@@ -75,6 +78,7 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    return this.userRepository.remove(user);
+    this.userRepository.remove(user);
+    return user;
   }
 }

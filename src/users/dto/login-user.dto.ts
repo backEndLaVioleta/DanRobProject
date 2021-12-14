@@ -8,10 +8,13 @@ import {
   IsOptional,
   IsBoolean,
 } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
 
+@InputType()
 export class LoginUserDto {
   @IsNotEmpty()
   @IsEmail()
+  @Field()
   readonly email: string;
 
   @IsNotEmpty()
@@ -21,6 +24,7 @@ export class LoginUserDto {
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'invalid credentials',
   })
+  @Field()
   readonly password: string;
 
   @IsOptional()

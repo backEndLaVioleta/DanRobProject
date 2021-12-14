@@ -33,11 +33,11 @@ export class User extends BaseEntity {
 
   @AfterInsert()
   logInsert() {
-    console.log('Inserted User with MongoId', this._id, 'and userId', this.id);
+    // console.log('Inserted User with MongoId', this._id, 'and userId', this.id);
   }
 
   @AfterUpdate()
   logUpdate() {
-    console.log('Updated User with MongoId', this._id, 'and userId', this.id);
+    console.log('Updated User with userId', this.id);
   }
 }

@@ -27,7 +27,8 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           healthcheck: ${{ secrets.HEROKU_APP_URL }}
-          delay: 10
+          region: eu
+          delay: 5
           usedocker: true
         env:
           HD_NODE_ENV: production
