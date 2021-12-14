@@ -212,6 +212,18 @@ to work in local with the remote branch
 	Branch 'dev-rob' set up to track remote branch 'dev-rob' from 'origin'
 	```
 ready to work with the desired branch
+
+### Avoiding pull request as owner
+
+gitmoji -c (*lista de emojis*)
+
+git checkout <*main branch*>
+
+git rebase <*your branch*>
+
+git push
+
+
 	
 [Link](https://www.nobledesktop.com/learn/git/git-branches) to resources Git
 

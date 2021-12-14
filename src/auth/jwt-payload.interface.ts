@@ -1,4 +1,5 @@
 export interface JwtPayload {
   email: string;
-  isAdmin: boolean;
+  // isAdmin: boolean;
+  role: string;
 }
