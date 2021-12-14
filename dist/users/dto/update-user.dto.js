@@ -11,25 +11,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateUserDto = void 0;
 const class_validator_1 = require("class-validator");
-class UpdateUserDto {
-}
+const graphql_1 = require("@nestjs/graphql");
+let UpdateUserDto = class UpdateUserDto {
+};
 __decorate([
     (0, class_validator_1.IsOptional)(),
+    (0, graphql_1.Field)({ nullable: true }),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "firstName", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
+    (0, graphql_1.Field)({ nullable: true }),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "lastName", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEmail)(),
+    (0, graphql_1.Field)({ nullable: true }),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
+    (0, graphql_1.Field)({ nullable: true }),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "password", void 0);
+UpdateUserDto = __decorate([
+    (0, graphql_1.InputType)()
+], UpdateUserDto);
 exports.UpdateUserDto = UpdateUserDto;
 //# sourceMappingURL=update-user.dto.js.map

@@ -15,24 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecipesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
-const recipe_entity_1 = require("./entities/recipe.entity");
+const recipe_repository_1 = require("./recipe.repository");
 let RecipesService = class RecipesService {
     constructor(recipeRepository) {
         this.recipeRepository = recipeRepository;
-    }
-    async create(body) {
-        try {
-            const recipe = this.recipeRepository.create(body);
-            return await this.recipeRepository.save(recipe);
-        }
-        catch (error) {
-            throw new common_1.BadRequestException({
-                statusCode: 400,
-                message: 'Bad Request',
-                error: 'Recipe not save into the DDBB',
-            });
-        }
     }
     async findAll() {
         try {
@@ -46,9 +32,11 @@ let RecipesService = class RecipesService {
             });
         }
     }
-    async findOne(id) {
+    async findOneById(id) {
         try {
-            const recipe = await this.recipeRepository.findOne({ recipeId: id });
+            const recipe = await this.recipeRepository.find({
+                where: { recipeId: id },
+            });
             if (!recipe) {
                 throw new common_1.NotFoundException('Recipe not found');
             }
@@ -62,7 +50,17 @@ let RecipesService = class RecipesService {
             });
         }
     }
-    async update(id, updateRecipeDto) {
+    async saveRecipe(body) {
+        const exists = await this.recipeRepository.find({
+            where: { recipeName: body.recipeName },
+        });
+        if (exists.length > 0) {
+            throw new common_1.ConflictException('Recipe already exists');
+        }
+        const recipe = await this.recipeRepository.saveRecipe(body);
+        return recipe;
+    }
+    async updateRecipe(id, updateRecipeDto) {
         try {
             const recipe = await this.recipeRepository.findOne({ recipeId: id });
             if (!recipe) {
@@ -79,27 +77,23 @@ let RecipesService = class RecipesService {
             });
         }
     }
-    async remove(id) {
+    async removeRecipe(id) {
+        const recipe = await this.recipeRepository.findOne({ recipeId: id });
+        if (!recipe) {
+            throw new common_1.NotFoundException('Recipe not found');
+        }
         try {
-            const recipe = await this.recipeRepository.findOne({ recipeId: id });
-            if (!recipe) {
-                throw new common_1.NotFoundException('Recipe not found');
-            }
             return this.recipeRepository.remove(recipe);
         }
         catch (error) {
-            throw new common_1.BadRequestException({
-                statusCode: 400,
-                message: 'Bad Request',
-                error: 'Recipe NOT deleted.',
-            });
+            throw new common_1.NotFoundException('Recipe not found');
         }
     }
 };
 RecipesService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(recipe_entity_1.Recipe)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(0, (0, typeorm_1.InjectRepository)(recipe_repository_1.RecipeRepository)),
+    __metadata("design:paramtypes", [recipe_repository_1.RecipeRepository])
 ], RecipesService);
 exports.RecipesService = RecipesService;
 //# sourceMappingURL=recipes.service.js.map

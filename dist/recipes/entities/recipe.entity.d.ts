@@ -1,6 +1,6 @@
-import { ObjectID } from 'typeorm';
-export declare class Recipe {
-    id: ObjectID;
+import { ObjectID, BaseEntity } from 'typeorm';
+export declare class Recipe extends BaseEntity {
+    _id: ObjectID;
     recipeId: string;
     recipeName: string;
     description: string;
@@ -8,11 +8,11 @@ export declare class Recipe {
     type: 'starters' | 'salads' | 'mains' | 'desserts';
     ingredients: string[];
     extrasAvailable: string[];
-    timesMade: number;
     instructions: string;
     prepTime: number;
     cookTime: number;
     totalTime: number;
+    timesMade: number;
     allergens: string[];
     isVegan: boolean;
     isVegetarian: boolean;

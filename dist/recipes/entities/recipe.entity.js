@@ -11,31 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Recipe = void 0;
 const typeorm_1 = require("typeorm");
-const uuid_1 = require("uuid");
-let Recipe = class Recipe {
+let Recipe = class Recipe extends typeorm_1.BaseEntity {
     constructor() {
-        this.recipeId = (0, uuid_1.v4)();
-        this.ingredients = [];
+        super(...arguments);
         this.extrasAvailable = [];
         this.allergens = [];
     }
     logInsert() {
-        console.log('Inserted Recipe with MongoId', this.id, 'and recipeId', this.recipeId);
+        console.log('Inserted Recipe with MongoId', this._id, 'and name', this.recipeName);
     }
     logUpdate() {
-        console.log('Inserted Recipe with MongoId', this.id, 'and recipeId', this.recipeId);
+        console.log('Updated Recipe with MongoId', this._id, 'and name', this.recipeName);
     }
 };
 __decorate([
     (0, typeorm_1.ObjectIdColumn)(),
     __metadata("design:type", typeorm_1.ObjectID)
-], Recipe.prototype, "id", void 0);
+], Recipe.prototype, "_id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], Recipe.prototype, "recipeId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
+    (0, typeorm_1.Index)({ unique: true }),
     __metadata("design:type", String)
 ], Recipe.prototype, "recipeName", void 0);
 __decorate([
@@ -60,10 +59,6 @@ __decorate([
 ], Recipe.prototype, "extrasAvailable", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Recipe.prototype, "timesMade", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Recipe.prototype, "instructions", void 0);
 __decorate([
@@ -78,6 +73,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Recipe.prototype, "totalTime", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Recipe.prototype, "timesMade", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Array)

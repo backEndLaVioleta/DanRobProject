@@ -17,10 +17,20 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const class_validator_1 = require("class-validator");
 const user_repository_1 = require("./user.repository");
+const auth_service_1 = require("../auth/auth.service");
+const access_token_type_1 = require("../auth/access-token.type");
 let UsersService = class UsersService {
-    constructor(userRepository) {
+    constructor(userRepository, authService) {
         this.userRepository = userRepository;
+        this.authService = authService;
         this.logger = new common_1.Logger('UsersService');
+    }
+    async signUp(createUserDto) {
+        const user = await this.userRepository.signUp(createUserDto);
+        return user;
+    }
+    async signIn(loginUserDto) {
+        return await this.authService.signIn(loginUserDto);
     }
     async findAll() {
         try {
@@ -61,13 +71,15 @@ let UsersService = class UsersService {
         if (!user) {
             throw new common_1.NotFoundException('User not found');
         }
-        return this.userRepository.remove(user);
+        this.userRepository.remove(user);
+        return user;
     }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_repository_1.UserRepository)),
-    __metadata("design:paramtypes", [user_repository_1.UserRepository])
+    __metadata("design:paramtypes", [user_repository_1.UserRepository,
+        auth_service_1.AuthService])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

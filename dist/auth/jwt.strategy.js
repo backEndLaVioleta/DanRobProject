@@ -22,7 +22,7 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
     constructor(userRepository) {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: 'topSecret51',
+            secretOrKey: process.env.SECRET,
         });
         this.userRepository = userRepository;
     }

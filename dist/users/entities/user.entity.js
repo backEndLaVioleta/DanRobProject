@@ -13,10 +13,9 @@ exports.User = void 0;
 const typeorm_1 = require("typeorm");
 let User = class User extends typeorm_1.BaseEntity {
     logInsert() {
-        console.log('Inserted User with MongoId', this._id, 'and userId', this.id);
     }
     logUpdate() {
-        console.log('Updated User with MongoId', this._id, 'and userId', this.id);
+        console.log('Updated User with userId', this.id);
     }
 };
 __decorate([
