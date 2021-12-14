@@ -10,9 +10,14 @@ import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
 import configuration from './config/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { UserResolver } from './users/user.resolver';
 
 @Module({
   imports: [
+    GraphQLModule.forRoot({
+      autoSchemaFile: true,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
@@ -31,6 +36,7 @@ import configuration from './config/config';
   ],
   controllers: [AppController],
   providers: [
+    UserResolver,
     AppService,
     {
       provide: APP_PIPE,

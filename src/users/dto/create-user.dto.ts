@@ -7,16 +7,21 @@ import {
   MaxLength,
   Matches,
 } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
 
+@InputType()
 export class CreateUserDto {
+  @Field()
   @IsOptional()
   readonly firstName: string;
 
   @IsOptional()
+  @Field()
   readonly lastName: string;
 
   @IsNotEmpty()
   @IsEmail()
+  @Field()
   readonly email: string;
 
   @IsNotEmpty()
@@ -26,5 +31,6 @@ export class CreateUserDto {
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'password too weak',
   })
+  @Field()
   readonly password: string;
 }

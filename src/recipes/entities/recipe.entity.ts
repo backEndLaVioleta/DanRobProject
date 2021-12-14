@@ -5,19 +5,25 @@ import {
   Column,
   AfterInsert,
   AfterUpdate,
+  PrimaryColumn,
+  Index,
+  BaseEntity,
 } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
-export class Recipe {
-  @ObjectIdColumn() id: ObjectID;
-  @Column() recipeId: string = uuidv4();
-  @Column() recipeName: string;
+export class Recipe extends BaseEntity {
+  @ObjectIdColumn() _id: ObjectID;
+  @PrimaryColumn() recipeId: string;
+
+  @Column()
+  @Index({ unique: true })
+  recipeName: string;
+
   @Column() description: string;
   @Column() photo: string;
   @Column() type: 'starters' | 'salads' | 'mains' | 'desserts';
   // TODO: maybe add ingredients as embedded entities
-  @Column() ingredients: string[] = [];
+  @Column() ingredients: string[];
   @Column() extrasAvailable: string[] = [];
   @Column() timesMade: number;
   @Column() instructions: string;
@@ -58,19 +64,19 @@ export class Recipe {
   logInsert() {
     console.log(
       'Inserted Recipe with MongoId',
-      this.id,
-      'and recipeId',
-      this.recipeId,
+      this._id,
+      'and name',
+      this.recipeName,
     );
   }
 
   @AfterUpdate()
   logUpdate() {
     console.log(
-      'Inserted Recipe with MongoId',
-      this.id,
-      'and recipeId',
-      this.recipeId,
+      'Updated Recipe with MongoId',
+      this._id,
+      'and name',
+      this.recipeName,
     );
   }
 }

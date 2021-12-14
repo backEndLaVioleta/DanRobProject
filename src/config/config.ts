@@ -8,5 +8,6 @@ export default () => ({
     ssl: true,
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    synchronize: true,
   },
 });
