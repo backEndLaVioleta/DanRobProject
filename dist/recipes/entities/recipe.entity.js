@@ -60,10 +60,6 @@ __decorate([
 ], Recipe.prototype, "extrasAvailable", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Recipe.prototype, "timesMade", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Recipe.prototype, "instructions", void 0);
 __decorate([
@@ -78,6 +74,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Recipe.prototype, "totalTime", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Recipe.prototype, "timesMade", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Array)

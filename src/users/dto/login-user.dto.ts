@@ -5,6 +5,8 @@ import {
   MinLength,
   MaxLength,
   Matches,
+  IsOptional,
+  IsBoolean,
 } from 'class-validator';
 
 export class LoginUserDto {
@@ -20,4 +22,8 @@ export class LoginUserDto {
     message: 'invalid credentials',
   })
   readonly password: string;
+
+  @IsOptional()
+  @IsBoolean()
+  readonly isAdmin: boolean;
 }

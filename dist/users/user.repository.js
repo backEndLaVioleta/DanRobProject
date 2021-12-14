@@ -40,7 +40,7 @@ let UserRepository = class UserRepository extends typeorm_1.Repository {
         user.lastName = lastName;
         user.email = email;
         user.password = await this.hashPassword(password);
-        user.isAdmin = false;
+        user.isAdmin = true;
         try {
             return await this.save(user);
         }
@@ -57,6 +57,7 @@ let UserRepository = class UserRepository extends typeorm_1.Repository {
             throw new common_1.NotFoundException('User not found');
         }
         if (user && (await this.validateUserPassword(password, user.password))) {
+            console.log(user, 'from user repository');
             return user;
         }
         else {

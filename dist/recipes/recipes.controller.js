@@ -17,7 +17,6 @@ const common_1 = require("@nestjs/common");
 const recipes_service_1 = require("./recipes.service");
 const create_recipe_dto_1 = require("./dto/create-recipe.dto");
 const update_recipe_dto_1 = require("./dto/update-recipe.dto");
-const passport_1 = require("@nestjs/passport");
 let RecipesController = class RecipesController {
     constructor(recipesService) {
         this.recipesService = recipesService;
@@ -75,7 +74,6 @@ __decorate([
 ], RecipesController.prototype, "remove", null);
 RecipesController = __decorate([
     (0, common_1.Controller)('recipes'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     __metadata("design:paramtypes", [recipes_service_1.RecipesService])
 ], RecipesController);
 exports.RecipesController = RecipesController;

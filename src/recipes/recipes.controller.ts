@@ -15,6 +15,8 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('recipes')
 @UseGuards(AuthGuard())
+// TODO use of roles()
+// can't find the way with boolean
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
