@@ -23,7 +23,7 @@ export class User extends BaseEntity {
   @Index({ unique: true })
   email: string;
   @Column() password: string;
-  @Column() isAdmin: boolean;
+  @Column({ default: false }) isAdmin: boolean;
 
   // TODO: possibly allow various types of users
   // @Column({ default: 'user' }) role: string;

@@ -7,6 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Recipe } from './entities/recipe.entity';
 import { RecipeRepository } from './recipe.repository';
 
 @Injectable()
@@ -28,15 +29,16 @@ export class RecipesService {
     }
   }
 
-  async findOneById(id: string) {
+  async findOneById(id: string): Promise<Recipe> {
     try {
       const recipe = await this.recipeRepository.find({
         where: { recipeId: id },
       });
+
       if (!recipe) {
         throw new NotFoundException('Recipe not found');
       }
-      return recipe;
+      return recipe[0];
     } catch (error) {
       throw new NotFoundException({
         statusCode: 404,
@@ -83,7 +85,8 @@ export class RecipesService {
       throw new NotFoundException('Recipe not found');
     }
     try {
-      return this.recipeRepository.remove(recipe);
+      this.recipeRepository.remove(recipe);
+      return recipe;
     } catch (error) {
       throw new NotFoundException('Recipe not found');
     }
