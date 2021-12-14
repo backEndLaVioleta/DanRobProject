@@ -10,13 +10,6 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-<<<<<<< HEAD
-    JwtModule.register({
-      secret: 'myLittleSecret',
-      signOptions: {
-        expiresIn: 3600,
-      },
-=======
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
@@ -25,7 +18,6 @@ import { JwtStrategy } from './jwt.strategy';
           expiresIn: 3600,
         },
       }),
->>>>>>> 0106798b820b689daba89e4057724bafb73af7cd
     }),
     TypeOrmModule.forFeature([UserRepository]),
   ],
