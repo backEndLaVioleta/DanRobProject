@@ -13,7 +13,7 @@ import {
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   async signUp(createUserDto: CreateUserDto): Promise<User> {
-    const { firstName, lastName, email, password } = createUserDto;
+    const { firstName, lastName, email, password, role } = createUserDto;
 
     const user = this.create();
     user.id = uuid();
@@ -21,7 +21,7 @@ export class UserRepository extends Repository<User> {
     user.lastName = lastName;
     user.email = email;
     user.password = await this.hashPassword(password);
-    user.isAdmin = false;
+    user.role = role;
 
     try {
       return await this.save(user);
@@ -42,6 +42,7 @@ export class UserRepository extends Repository<User> {
     }
 
     if (user && (await this.validateUserPassword(password, user.password))) {
+      console.log(user, 'from user repository');
       return user;
     } else {
       throw new UnauthorizedException('Invalid credentials');

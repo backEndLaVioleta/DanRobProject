@@ -24,11 +24,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userRepository.findOne({
       where: { email },
     });
-
+    console.log(user);
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-
+    delete user.password;
+    console.log(user);
     return user;
   }
 }
