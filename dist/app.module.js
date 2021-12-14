@@ -30,6 +30,8 @@ AppModule = __decorate([
         imports: [
             graphql_1.GraphQLModule.forRoot({
                 autoSchemaFile: true,
+                introspection: true,
+                playground: true,
             }),
             config_1.ConfigModule.forRoot({
                 isGlobal: true,

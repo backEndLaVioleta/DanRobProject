@@ -16,6 +16,8 @@ import { UserResolver } from './users/user.resolver';
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: true,
+      introspection: true,
+      playground: true,
     }),
     ConfigModule.forRoot({
       isGlobal: true,
