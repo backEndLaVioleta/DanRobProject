@@ -2,12 +2,14 @@ import { Module } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
 import { RecipesController } from './recipes.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Recipe } from './entities/recipe.entity';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
+import { RecipeRepository } from './recipe.repository';
+import { RecipesResolver } from './recipe.resolver';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Recipe]), AuthModule],
+  imports: [AuthModule, TypeOrmModule.forFeature([RecipeRepository])],
   controllers: [RecipesController],
-  providers: [RecipesService],
+  providers: [RecipesService, RecipesResolver],
+  exports: [RecipesService],
 })
 export class RecipesModule {}

@@ -17,10 +17,10 @@ export class RecipeType {
   @Field()
   type: 'starters' | 'salads' | 'mains' | 'desserts';
 
-  @Field()
+  @Field(() => [String])
   ingredients: string[];
 
-  @Field()
+  @Field(() => [String])
   extrasAvailable: string[];
 
   @Field()
@@ -38,7 +38,7 @@ export class RecipeType {
   @Field()
   totalTime: number;
 
-  @Field()
+  @Field(() => [String])
   allergens: string[];
 
   @Field()
