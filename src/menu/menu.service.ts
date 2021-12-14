@@ -4,6 +4,7 @@ import { UpdateMenuDto } from './dto/update-menu.dto';
 
 @Injectable()
 export class MenuService {
+  
   create(createMenuDto: CreateMenuDto) {
     return 'This action adds a new menu';
   }

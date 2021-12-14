@@ -450,12 +450,73 @@ db.createCollection('menu', {
                         bsonType: 'string',
                         description: 'list of the extras'
                     }
-                },
+                }
             }
 
         }
     }
 });
+
+db.createCollection('order', {
+
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['orderDate', 'menuItemId', 'userId', 'totalPrice' ],
+            properties: {
+                _id: {
+                    bsonType: 'objectId',
+                    description: 'Mongodb hex system of id'
+                },
+                menuItemId: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'objectId',
+                        description: 'array of menus id'
+                    } 
+                },
+                userId: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'objectId',
+                        description: 'array of users id'
+                    } 
+                },
+                userId: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'objectId',
+                        description: 'array of users id'
+                    } 
+                },
+                extra_ingredients: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'string',
+                        description: 'extras to add to the order'
+                    } 
+                },
+                removed_ingredients: {
+                    bsonType: 'array',
+                    items: {
+                        bsonType: 'string',
+                        description: 'array of users id'
+                    } 
+                },,
+                quantity: {
+                    bsontype: ['int', 'double'],
+                    description: 'description of the dish'
+                },
+                totalPrice: {
+                    bsontype: ['int', 'double','decimal'],
+                    description: 'description of the dish'
+                }
+            }
+
+        }
+    }
+});
+
   
  //db.getCollection('users').find({})
  //db.getCollection('recipes').find({})

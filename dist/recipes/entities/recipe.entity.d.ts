@@ -8,11 +8,11 @@ export declare class Recipe {
     type: 'starters' | 'salads' | 'mains' | 'desserts';
     ingredients: string[];
     extrasAvailable: string[];
-    timesMade: number;
     instructions: string;
     prepTime: number;
     cookTime: number;
     totalTime: number;
+    timesMade: number;
     allergens: string[];
     isVegan: boolean;
     isVegetarian: boolean;

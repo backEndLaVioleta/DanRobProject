@@ -21,7 +21,7 @@ export class UserRepository extends Repository<User> {
     user.lastName = lastName;
     user.email = email;
     user.password = await this.hashPassword(password);
-    user.isAdmin = false;
+    user.isAdmin = true;
 
     try {
       return await this.save(user);
@@ -42,6 +42,7 @@ export class UserRepository extends Repository<User> {
     }
 
     if (user && (await this.validateUserPassword(password, user.password))) {
+      console.log(user, 'from user repository');
       return user;
     } else {
       throw new UnauthorizedException('Invalid credentials');

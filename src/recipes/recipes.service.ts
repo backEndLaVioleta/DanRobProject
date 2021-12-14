@@ -18,6 +18,7 @@ export class RecipesService {
   async create(body: CreateRecipeDto) {
     try {
       const recipe = this.recipeRepository.create(body);
+      console.log(recipe);
       return await this.recipeRepository.save(recipe);
     } catch (error) {
       throw new BadRequestException({

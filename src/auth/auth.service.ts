@@ -36,6 +36,7 @@ export class AuthService {
 
     const payload: JwtPayload = {
       email: user.email,
+      isAdmin: user.isAdmin,
     };
     const access_token = this.jwtService.sign(payload);
     this.logger.debug(

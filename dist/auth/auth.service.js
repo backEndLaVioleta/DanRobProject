@@ -32,6 +32,7 @@ let AuthService = class AuthService {
         const user = await this.userRepository.signIn(email, password);
         const payload = {
             email: user.email,
+            isAdmin: user.isAdmin,
         };
         const access_token = this.jwtService.sign(payload);
         this.logger.debug(`Generated JWT Token with payload ${JSON.stringify(payload)}`);
