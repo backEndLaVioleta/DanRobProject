@@ -44,7 +44,7 @@ export class User extends BaseEntity {
   password: string;
 
   @ApiProperty({ example: '["baby spinachs salad", "blossh burger"]' })
-  @Column()
+  @Column({ type: 'array' })
   recipes: string[];
 
   @ApiProperty({ example: 'true' })
