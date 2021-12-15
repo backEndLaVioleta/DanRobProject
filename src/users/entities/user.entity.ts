@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import {
   AfterInsert,
   AfterUpdate,
@@ -48,13 +48,15 @@ export class User extends BaseEntity {
   recipes: string[];
 
   @ApiProperty({ example: 'true' })
+  @IsOptional()
   @Column()
   isAdmin: boolean;
 
   // TODO: possibly allow various types of users
-  // @ApiProperty({ example: 'user' })
-  // @Column({ default: 'user' })
-  // role: string;
+  @ApiProperty({ example: 'user' })
+  @IsOptional()
+  @Column({ default: 'user' })
+  role: string;
 
   // array to push every user the recipes
   // @ApiProperty({ type: [Object] })
