@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Entity,
   ObjectIdColumn,
@@ -12,53 +13,166 @@ import {
 
 @Entity()
 export class Recipe extends BaseEntity {
-  @ObjectIdColumn() _id: ObjectID;
-  @PrimaryColumn() recipeId: string;
+  @ApiProperty({ example: 'as-1234h73' })
+  @ObjectIdColumn()
+  _id: ObjectID;
 
+  @ApiProperty({ example: 'as-1234h73' })
+  @PrimaryColumn()
+  recipeId: string;
+
+  @ApiProperty({ example: 'blossh burger' })
   @Column()
   @Index({ unique: true })
   recipeName: string;
 
-  @Column() description: string;
-  @Column() photo: string;
-  @Column() type: 'starters' | 'salads' | 'mains' | 'desserts';
+  @ApiProperty({ example: 'description of the dish' })
+  @Column()
+  description: string;
+
+  @ApiProperty({ example: 'https://imgur.com/W8ElPlZ' })
+  @Column()
+  photo: string;
+
+  @ApiProperty({ example: "'starters' | 'salads' | 'mains' | 'desserts'" })
+  @Column({ type: 'enum' })
+  type: 'starters' | 'salads' | 'mains' | 'desserts';
   // TODO: maybe add ingredients as embedded entities
-  @Column() ingredients: string[];
-  @Column() extrasAvailable: string[] = [];
-  @Column() instructions: string;
-  @Column() prepTime: number;
-  @Column() cookTime: number;
-  @Column() totalTime: number;
-  @Column() timesMade: number;
-  @Column() allergens: string[] = [];
-  @Column() isVegan: boolean;
-  @Column() isVegetarian: boolean;
-  @Column() isGlutenFree: boolean;
-  @Column() isDairyFree: boolean;
-  @Column() isLactoseFree: boolean;
-  @Column() isNutFree: boolean;
-  @Column() isPescatarian: boolean;
-  @Column() isPaleo: boolean;
-  @Column() isKetogenic: boolean;
-  @Column() isQuick: boolean;
-  @Column() isHealthy: boolean;
-  @Column() isLowFodmap: boolean;
-  @Column() isSpicy: boolean;
-  @Column() isEggFree: boolean;
-  @Column() isSoyFree: boolean;
-  @Column() isFishFree: boolean;
-  @Column() isShellfishFree: boolean;
-  @Column() isPorkFree: boolean;
-  @Column() isBeefFree: boolean;
-  @Column() isAlcoholFree: boolean;
-  @Column() isClean: boolean;
-  @Column() isSustainable: boolean;
-  @Column() isLowCarb: boolean;
-  @Column() isLowSodium: boolean;
-  @Column() isLowFat: boolean;
-  @Column() isLowSugar: boolean;
-  @Column() isWheatFree: boolean;
-  @Column() onMenu: boolean;
+  @ApiProperty({ example: '["tomatoes", "mixed salad", "parmesan chez"]' })
+  @Column()
+  ingredients: string[];
+
+  @ApiProperty({ example: '["tomatoes", "mixed salad", "parmesan chez"]' })
+  @Column()
+  extrasAvailable: string[] = [];
+
+  @ApiProperty({ example: 'description of cooking method' })
+  @Column()
+  instructions: string;
+
+  @ApiProperty({ example: '8' })
+  @Column()
+  prepTime: number;
+
+  @ApiProperty({ example: '8' })
+  @Column()
+  cookTime: number;
+
+  @ApiProperty({ example: '8' })
+  @Column()
+  totalTime: number;
+
+  @ApiProperty({ example: '8' })
+  @Column()
+  timesMade: number;
+
+  @ApiProperty({ example: '["nuts", "fishshell", "gluten"]' })
+  @Column()
+  allergens: string[] = [];
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isVegan: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isVegetarian: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isGlutenFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isDairyFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isLactoseFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isNutFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isPescatarian: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isPaleo: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isKetogenic: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isQuick: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isHealthy: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isLowFodmap: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isSpicy: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isEggFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isSoyFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isFishFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isShellfishFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isPorkFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isBeefFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isAlcoholFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isSustainable: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isLowCarb: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isLowFat: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isLowSugar: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isWheatFree: boolean;
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  onMenu: boolean;
 
   @AfterInsert()
   logInsert() {

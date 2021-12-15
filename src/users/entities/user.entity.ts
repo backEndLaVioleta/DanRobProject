@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 import {
   AfterInsert,
   AfterUpdate,
@@ -15,15 +16,32 @@ import {
 
 @Entity()
 export class User extends BaseEntity {
-  @ObjectIdColumn() _id: ObjectID;
-  @PrimaryColumn() id: string;
-  @Column() firstName: string;
-  @Column() lastName: string;
+  @ApiProperty({ example: 'as-1234h73' })
+  @ObjectIdColumn()
+  _id: ObjectID;
 
+  @ApiProperty({ example: 'as-1234h73' })
+  @PrimaryColumn()
+  id: string;
+
+  @ApiProperty({ example: 'John' })
+  @Column()
+  firstName: string;
+
+  @ApiProperty({ example: 'Wick' })
+  @Column()
+  lastName: string;
+
+  @ApiProperty({ example: 'hello@hello.com' })
+  @IsNotEmpty()
   @Column()
   @Index({ unique: true })
   email: string;
-  @Column() password: string;
+
+  @ApiProperty({ example: '1234myMail' })
+  @IsNotEmpty()
+  @Column({ type: 'string' })
+  password: string;
   // @Column() isAdmin: boolean;
 
   // TODO: possibly allow various types of users

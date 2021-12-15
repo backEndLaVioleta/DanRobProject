@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Recipe } from 'src/recipes/entities/recipe.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
@@ -12,15 +13,19 @@ import {
 
 @Entity()
 export class Order {
-  @ObjectIdColumn() id: ObjectID;
+  @ApiProperty({ example: 'as-1234h73' })
+  @ObjectIdColumn()
+  id: ObjectID;
   @CreateDateColumn() recipeOrder: Date;
 
   // users
+  @ApiProperty({ example: 'as-1234h73' })
   @ManyToOne(() => User, (user) => user._id)
   @JoinColumn()
   user: User;
 
   // recipes
+  @ApiProperty({ example: 'as-1234h73' })
   @ManyToOne(() => Recipe, (recipe) => recipe._id)
   @JoinColumn()
   recipe: Recipe;
@@ -32,6 +37,7 @@ export class Order {
   // @Column() removed_ingredients: string[] = [];
   // @Column() quantity: number;
   // @Column() totalPrice: number;
-  @Column()
+  @ApiProperty({ example: 'pending' })
+  @Column({ type: 'enum' })
   status: 'pending' | 'preparing' | 'ready' | 'delivered';
 }
