@@ -113,6 +113,8 @@ DB how many times a recipe has been used to do some of the items from the rest m
 
  * End [Points](https://documenter.getpostman.com/view/9175109/UVJYLzEw) (___or at least the main ones___)
 
+ * [Swagger](https://proyecto-rob-y-dan.herokuapp.com/test/) documentation
+
 #### Presentation 26/12/21
 
  * Planning 🚴‍♂️
