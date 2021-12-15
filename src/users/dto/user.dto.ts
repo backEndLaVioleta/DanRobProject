@@ -23,5 +23,8 @@ export class UserDto {
   isAdmin: boolean;
 
   @Expose()
+  role: string;
+
+  @Expose()
   access_token: string;
 }

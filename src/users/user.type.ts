@@ -28,4 +28,7 @@ export class UserType {
 
   @Field()
   updatedDate: Date;
+
+  @Field()
+  role: string;
 }

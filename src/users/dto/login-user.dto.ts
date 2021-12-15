@@ -5,6 +5,7 @@ import {
   MinLength,
   MaxLength,
   Matches,
+  IsOptional,
   // IsBoolean,
 } from 'class-validator';
 import { InputType, Field } from '@nestjs/graphql';
@@ -27,6 +28,7 @@ export class LoginUserDto {
   readonly password: string;
 
   // @IsNotEmpty()
+  @IsOptional()
   @IsString()
   readonly role: string;
   // @IsBoolean()
