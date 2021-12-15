@@ -11,155 +11,155 @@ export class CreateRecipeDto {
   @IsNotEmpty()
   readonly description: string;
 
-  @Field()
   @IsOptional()
+  @Field({ nullable: true })
   photo: string;
 
-  @Field()
   @IsOptional()
+  @Field({ nullable: true })
   type: 'starters' | 'salads' | 'mains' | 'desserts';
 
-  @Field(() => [String])
   @IsOptional()
-  ingredients: string[];
+  @Field(() => [String], { nullable: true })
+  ingredients?: string[];
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   @IsOptional()
-  extrasAvailable: string[];
+  extrasAvailable?: string[];
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   timesMade: number;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   instructions: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   prepTime: number;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   cookTime: number;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   totalTime: number;
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   @IsOptional()
   allergens: string[];
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isVegan: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isVegetarian: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isGlutenFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isDairyFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isLactoseFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isNutFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isPescatarian: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isPaleo: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isKetogenic: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isQuick: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isHealthy: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isLowFodmap: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isSpicy: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isEggFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isSoyFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isFishFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isShellfishFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isPorkFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isBeefFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isAlcoholFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isClean: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isSustainable: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isLowCarb: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isLowSodium: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isLowFat: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isLowSugar: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   isWheatFree: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   onMenu: boolean;
 }

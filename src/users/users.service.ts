@@ -13,7 +13,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { AuthService } from '../auth/auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
-import { AccessTokenType } from 'src/auth/access-token.type';
+import { AccessTokenType } from '../auth/access-token.type';
 
 @Injectable()
 export class UsersService {
@@ -61,6 +61,17 @@ export class UsersService {
         'Not proper email format',
         HttpStatus.BAD_REQUEST,
       );
+  }
+
+  async assignRecipeToUser(userId: string, recipeIds: string[]): Promise<User> {
+    const user = await this.userRepository.findOne({ id: userId });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    user.recipes = [...user.recipes, ...recipeIds];
+
+    await this.userRepository.save(user);
+    return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

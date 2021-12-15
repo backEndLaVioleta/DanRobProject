@@ -10,6 +10,7 @@ import {
   Index,
   BaseEntity,
 } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 export class Recipe extends BaseEntity {
@@ -19,7 +20,7 @@ export class Recipe extends BaseEntity {
 
   @ApiProperty({ example: 'as-1234h73' })
   @PrimaryColumn()
-  recipeId: string;
+  recipeId: string = uuidv4();
 
   @ApiProperty({ example: 'blossh burger' })
   @Column()
@@ -179,18 +180,18 @@ export class Recipe extends BaseEntity {
     console.log(
       'Inserted Recipe with MongoId',
       this._id,
-      'and name',
-      this.recipeName,
+      'and recipeId',
+      this.recipeId,
     );
   }
 
   @AfterUpdate()
   logUpdate() {
     console.log(
-      'Updated Recipe with MongoId',
+      'Inserted Recipe with MongoId',
       this._id,
-      'and name',
-      this.recipeName,
+      'and recipeId',
+      this.recipeId,
     );
   }
 }
