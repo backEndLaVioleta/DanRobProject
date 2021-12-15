@@ -26,7 +26,7 @@ export class User extends BaseEntity {
   @Column() password: string;
   @Column({ default: false }) isAdmin: boolean;
 
-  @Column()
+  @Column({ default: [] })
   recipes: string[];
 
   // TODO: possibly allow various types of users

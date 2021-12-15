@@ -39,7 +39,6 @@ export class CreateUserDto {
   @Field({ defaultValue: 'user' })
   readonly role: string;
 
-  @IsUUID('4', { each: true })
   @Field(() => [ID], { defaultValue: [] })
   recipes: string[];
 }
