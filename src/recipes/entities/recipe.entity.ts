@@ -5,31 +5,25 @@ import {
   Column,
   AfterInsert,
   AfterUpdate,
-  PrimaryColumn,
-  Index,
-  BaseEntity,
 } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
-export class Recipe extends BaseEntity {
-  @ObjectIdColumn() _id: ObjectID;
-  @PrimaryColumn() recipeId: string;
-
-  @Column()
-  @Index({ unique: true })
-  recipeName: string;
-
+export class Recipe {
+  @ObjectIdColumn() id: ObjectID;
+  @Column() recipeId: string = uuidv4();
+  @Column() recipeName: string;
   @Column() description: string;
   @Column() photo: string;
   @Column() type: 'starters' | 'salads' | 'mains' | 'desserts';
   // TODO: maybe add ingredients as embedded entities
-  @Column() ingredients: string[];
+  @Column() ingredients: string[] = [];
   @Column() extrasAvailable: string[] = [];
+  @Column() timesMade: number;
   @Column() instructions: string;
   @Column() prepTime: number;
   @Column() cookTime: number;
   @Column() totalTime: number;
-  @Column() timesMade: number;
   @Column() allergens: string[] = [];
   @Column() isVegan: boolean;
   @Column() isVegetarian: boolean;
@@ -64,19 +58,19 @@ export class Recipe extends BaseEntity {
   logInsert() {
     console.log(
       'Inserted Recipe with MongoId',
-      this._id,
-      'and name',
-      this.recipeName,
+      this.id,
+      'and recipeId',
+      this.recipeId,
     );
   }
 
   @AfterUpdate()
   logUpdate() {
     console.log(
-      'Updated Recipe with MongoId',
-      this._id,
-      'and name',
-      this.recipeName,
+      'Inserted Recipe with MongoId',
+      this.id,
+      'and recipeId',
+      this.recipeId,
     );
   }
 }

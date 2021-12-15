@@ -13,7 +13,7 @@ import {
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   async signUp(createUserDto: CreateUserDto): Promise<User> {
-    const { firstName, lastName, email, password } = createUserDto;
+    const { firstName, lastName, email, password, recipes } = createUserDto;
 
     const user = this.create();
     user.id = uuid();
@@ -22,6 +22,7 @@ export class UserRepository extends Repository<User> {
     user.email = email;
     user.password = await this.hashPassword(password);
     user.isAdmin = false;
+    user.recipes = recipes;
 
     try {
       return await this.save(user);

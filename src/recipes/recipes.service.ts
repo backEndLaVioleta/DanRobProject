@@ -29,6 +29,28 @@ export class RecipesService {
     }
   }
 
+  async findManyRecipes(ids: string[]): Promise<Recipe[]> {
+    try {
+      const recipes = await this.recipeRepository.find({
+        where: {
+          recipeId: {
+            $in: ids,
+          },
+        },
+      });
+      if (!recipes) {
+        throw new NotFoundException('Recipes not found');
+      }
+      return recipes;
+    } catch (error) {
+      throw new NotFoundException({
+        statusCode: 404,
+        message: 'Recipes not found',
+        error: 'Recipes seems to be not in the DDBB ',
+      });
+    }
+  }
+
   async findOneById(id: string): Promise<Recipe> {
     try {
       const recipe = await this.recipeRepository.find({

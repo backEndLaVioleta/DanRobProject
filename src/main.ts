@@ -12,8 +12,10 @@ async function bootstrap() {
 
   // config swagger
   const configSwagger = new DocumentBuilder()
-    .setTitle('Blossh Recipes')
-    .setDescription('Dan & Rob Api and MongoDB')
+    .setTitle('Blossh Recipe App')
+    .setDescription(
+      'Mongo-REST-GraphQL "PHP" API ― Proyecto fin de curso CIFO La Violeta 2021 ',
+    )
     .setVersion('1.0')
     .addTag('Hospitality App')
     .build();
