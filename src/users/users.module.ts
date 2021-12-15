@@ -3,11 +3,16 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 import { UserResolver } from './user.resolver';
+import { RecipesModule } from '../recipes/recipes.module';
 
 @Module({
-  imports: [AuthModule, TypeOrmModule.forFeature([UserRepository])],
+  imports: [
+    AuthModule,
+    RecipesModule,
+    TypeOrmModule.forFeature([UserRepository]),
+  ],
   controllers: [UsersController],
   providers: [UsersService, UserResolver],
   exports: [UsersService],

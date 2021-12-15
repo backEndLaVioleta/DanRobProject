@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { RecipeType } from '../recipes/recipe.type';
 
 @ObjectType('User')
 export class UserType {
@@ -18,6 +19,9 @@ export class UserType {
 
   @Field()
   isAdmin: boolean;
+
+  @Field((type) => [RecipeType])
+  recipes: string[];
 
   @Field()
   createdDate: Date;

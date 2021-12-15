@@ -6,8 +6,9 @@ import {
   MinLength,
   MaxLength,
   Matches,
+  IsUUID,
 } from 'class-validator';
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, ID } from '@nestjs/graphql';
 
 @InputType()
 export class CreateUserDto {
@@ -36,4 +37,7 @@ export class CreateUserDto {
 
   @IsString()
   readonly role: string;
+  @IsUUID('4', { each: true })
+  @Field(() => [ID], { defaultValue: [] })
+  recipes: string[];
 }

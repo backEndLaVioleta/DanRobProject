@@ -18,10 +18,10 @@ export class RecipeType {
   type?: 'starters' | 'salads' | 'mains' | 'desserts';
 
   @Field(() => [String])
-  ingredients: string[];
+  ingredients?: string[];
 
   @Field(() => [String])
-  extrasAvailable: string[];
+  extrasAvailable?: string[];
 
   @Field({ nullable: true })
   timesMade?: number;
