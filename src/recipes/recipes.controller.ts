@@ -15,6 +15,8 @@ import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { RecipeDto } from './dto/recipe.dto';
 import { Serialize } from '../interceptors/serialize.interceptor';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Recipe } from './entities/recipe.entity';
 
 @Controller('recipes')
 @Serialize(RecipeDto)
@@ -23,6 +25,12 @@ export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
   @Get('/')
+  @ApiOperation({ summary: 'Get all the recipes' })
+  @ApiResponse({
+    status: 201,
+    description: 'List of recipes',
+    type: Recipe,
+  })
   findAll() {
     return this.recipesService.findAll();
   }

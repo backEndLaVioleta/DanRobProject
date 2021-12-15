@@ -31,6 +31,11 @@ export class User extends BaseEntity {
   @Column({ default: 'user' })
   role: string;
 
+  // array to push every user the recipes
+  // @ApiProperty({ type: [Object] })
+  // @Column()
+  // myRecipes: object[];
+
   @CreateDateColumn() createdDate: Date;
   @UpdateDateColumn() updatedDate: Date;
 

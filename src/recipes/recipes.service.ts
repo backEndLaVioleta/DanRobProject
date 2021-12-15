@@ -27,7 +27,11 @@ export class RecipesService {
 
   async findAll() {
     try {
-      return await this.recipeRepository.find();
+      // TODO make it ready to sort the list with parameters in the function
+      const sort = 'ASC';
+      return await this.recipeRepository.find({
+        order: { recipeName: sort },
+      });
     } catch (error) {
       throw new NotFoundException({
         statusCode: 404,
@@ -42,6 +46,7 @@ export class RecipesService {
       const recipe = await this.recipeRepository.find({
         where: { recipeId: id },
       });
+      console.log(`recipe${recipe} from recipes service`);
       if (!recipe) {
         throw new NotFoundException('Recipe not found');
       }
@@ -60,7 +65,7 @@ export class RecipesService {
       where: { recipeName: body.recipeName },
     });
 
-    if (exists.length > 0) {
+    if (!exists.length) {
       throw new ConflictException('Recipe already exists');
     }
 
