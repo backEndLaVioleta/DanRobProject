@@ -42,12 +42,19 @@ export class User extends BaseEntity {
   @IsNotEmpty()
   @Column({ type: 'string' })
   password: string;
-  // @Column() isAdmin: boolean;
+
+  @ApiProperty({ example: '["baby spinachs salad", "blossh burger"]' })
+  @Column()
+  recipes: string[];
+
+  @ApiProperty({ example: 'true' })
+  @Column()
+  isAdmin: boolean;
 
   // TODO: possibly allow various types of users
-  @ApiProperty({ example: 'user' })
-  @Column({ default: 'user' })
-  role: string;
+  // @ApiProperty({ example: 'user' })
+  // @Column({ default: 'user' })
+  // role: string;
 
   // array to push every user the recipes
   // @ApiProperty({ type: [Object] })
